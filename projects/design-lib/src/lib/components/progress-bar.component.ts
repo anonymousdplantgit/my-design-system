@@ -4,7 +4,7 @@ import { NgClass, NgIf } from '@angular/common';
 @Component({
   selector: 'ds-progress-bar',
   template: `
-    <div class="w-full">
+    <div class="w-full" [ngClass]="className">
       <!-- Label -->
       <div *ngIf="label || showPercentage" class="flex justify-between mb-1">
         <span *ngIf="label" class="text-sm font-medium text-neutral-700">{{ label }}</span>
@@ -64,6 +64,7 @@ export class ProgressBarComponent {
   @Input() rounded: boolean = true;
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() variant: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' = 'primary';
+  @Input() className: string = '';
 
   get progressValue(): number {
     return Math.min(100, Math.max(0, this.value));
