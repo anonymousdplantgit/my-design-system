@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef, OnInit, Optional, Self } from '@angular/core';
+import {Component, Input, forwardRef, OnInit, Optional, Self, Injector} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 import { format, parse, isValid } from 'date-fns';
 import {NgClass} from '@angular/common';
@@ -61,17 +61,20 @@ export class DatepickerComponent implements ControlValueAccessor, OnInit {
   private onChange: any = () => {};
   private onTouched: any = () => {};
 
-  constructor(@Optional() @Self() private ngControl: NgControl) {
+  private ngControl: NgControl | null = null;
+
+  constructor(private injector: Injector) {}
+
+  ngOnInit() {
+    this.ngControl = this.injector.get(NgControl, null);
+
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
       this.controlDir = this.ngControl;
-    }
-  }
 
-  ngOnInit() {
-    if (this.ngControl && this.ngControl.control) {
-      const control = this.ngControl.control;
-      this.disabled = control.disabled;
+      if (this.ngControl.control) {
+        this.disabled = this.ngControl.control.disabled;
+      }
     }
   }
 

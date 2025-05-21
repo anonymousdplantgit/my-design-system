@@ -8,7 +8,7 @@ import {
   SelectComponent,
   SelectOption
 } from 'design-lib';
-import {NgClass, NgForOf} from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -241,7 +241,8 @@ import {NgClass, NgForOf} from '@angular/common';
     ReactiveFormsModule,
     CheckboxComponent,
     NgClass,
-    DatepickerComponent
+    DatepickerComponent,
+    NgIf
   ]
 })
 export class AppComponent implements OnInit {

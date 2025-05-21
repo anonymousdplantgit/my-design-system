@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef, OnInit, HostBinding, Optional, Self, ElementRef } from '@angular/core';
+import { Component, Input, forwardRef, OnInit, HostBinding, Optional, Self, ElementRef, Inject, Injector } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, FormControl } from '@angular/forms';
 import {NgClass, NgIf} from '@angular/common';
 
@@ -52,7 +52,7 @@ import {NgClass, NgIf} from '@angular/common';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: InputComponent,
+      useExisting: forwardRef(() => InputComponent),
       multi: true
     }
   ]
@@ -77,23 +77,25 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   value: any = '';
   focused: boolean = false;
   controlDir?: NgControl;
+  private ngControl: NgControl | null = null;
 
   @HostBinding('class.ds-input-disabled') get isDisabled() { return this.disabled; }
 
   private onChange: any = () => {};
   private onTouched: any = () => {};
 
-  constructor(@Optional() @Self() private ngControl: NgControl) {
+  constructor(private injector: Injector) {}
+
+  ngOnInit() {
+    this.ngControl = this.injector.get(NgControl, null);
+
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
       this.controlDir = this.ngControl;
-    }
-  }
 
-  ngOnInit() {
-    if (this.ngControl && this.ngControl.control) {
-      const control = this.ngControl.control;
-      this.disabled = control.disabled;
+      if (this.ngControl.control) {
+        this.disabled = this.ngControl.control.disabled;
+      }
     }
   }
 

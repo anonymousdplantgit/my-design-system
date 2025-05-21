@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef, OnInit, Optional, Self } from '@angular/core';
+import {Component, Input, forwardRef, OnInit, Optional, Self, Injector} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 import {NgClass, NgForOf} from '@angular/common';
 
@@ -70,17 +70,21 @@ export class RadioComponent implements ControlValueAccessor, OnInit {
   private onChange: any = () => {};
   private onTouched: any = () => {};
 
-  constructor(@Optional() @Self() private ngControl: NgControl) {
+  // To this:
+  private ngControl: NgControl | null = null;
+
+  constructor(private injector: Injector) {}
+
+  ngOnInit() {
+    this.ngControl = this.injector.get(NgControl, null);
+
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
       this.controlDir = this.ngControl;
-    }
-  }
 
-  ngOnInit() {
-    if (this.ngControl && this.ngControl.control) {
-      const control = this.ngControl.control;
-      this.disabled = control.disabled;
+      if (this.ngControl.control) {
+        this.disabled = this.ngControl.control.disabled;
+      }
     }
 
     // Generate a unique name if not provided
