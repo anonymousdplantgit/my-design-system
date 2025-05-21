@@ -2,14 +2,13 @@
  * Public API Surface of design-lib
  */
 
-
 // Form Components
-export * from './lib/components/form-field.component';
-export * from './lib/components/input.component';
-export * from './lib/components/select.component';
-export * from './lib/components/radio.component';
-export * from './lib/components/checkbox.component';
-export * from './lib/components/datepicker.component';
+export * from './lib/inputs/form-field.component';
+export * from './lib/inputs/input.component';
+export * from './lib/inputs/select.component';
+export * from './lib/inputs/radio.component';
+export * from './lib/inputs/checkbox.component';
+export * from './lib/inputs/datepicker.component';
 
 // UI Components
 export * from './lib/components/button.component';
@@ -27,4 +26,4 @@ export * from './lib/components/spinner.component';
 // Directives
 export * from './lib/directives/tooltip.directive';
 // Services
-export { ModalService } from './lib/service/modal.service';
+export * from './lib/service/modal.service';

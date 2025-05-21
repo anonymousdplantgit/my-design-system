@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {NgClass, NgIf} from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'ds-button',
+  standalone: true,
   template: `
     <button
       [type]="type"
@@ -48,12 +49,9 @@ export class ButtonComponent {
   @Input() rounded: boolean = false;
   @Input() outline: boolean = false;
   @Input() flat: boolean = false;
+  @Input() raised: boolean = false;
 
   @Output() buttonClick = new EventEmitter<MouseEvent>();
-
-  onClick(event: MouseEvent): void {
-    this.buttonClick.emit(event);
-  }
 
   get computedClasses(): string {
     let classes = 'inline-flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2';
@@ -74,6 +72,11 @@ export class ButtonComponent {
       classes += ' rounded-full';
     } else {
       classes += ' rounded';
+    }
+
+    // Add raised/elevation classes
+    if (this.raised && !this.flat && !this.disabled) {
+      classes += this.variant === 'link' ? '' : ' shadow-md hover:shadow-lg transform hover:-translate-y-px active:shadow-sm active:translate-y-0 transition-transform';
     }
 
     // Add disabled classes
@@ -134,5 +137,9 @@ export class ButtonComponent {
       case 'link': return 'text-primary-600 hover:underline focus:ring-primary-500 shadow-none';
       default: return 'bg-primary-500 hover:bg-primary-600 text-white focus:ring-primary-500';
     }
+  }
+
+  onClick(event: MouseEvent): void {
+    this.buttonClick.emit(event);
   }
 }

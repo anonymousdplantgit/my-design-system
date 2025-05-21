@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import {
   BadgeComponent,
+  TabComponent,
+  TableColumnComponent,
   TableComponent,
   TabsComponent,
-  TabComponent, TableColumnComponent
 } from 'design-lib';
 import { ShowcaseSectionComponent } from '../shared/showcase-section.component';
 import { ExampleBoxComponent } from '../shared/example-box.component';
-import {JsonPipe, NgFor} from '@angular/common';
 
 interface User {
   id: number;
@@ -29,7 +29,6 @@ interface User {
     TableColumnComponent,
     TabsComponent,
     TabComponent,
-    JsonPipe,
     TableColumnComponent,
   ],
   template: `
@@ -62,7 +61,9 @@ interface User {
             <p class="text-sm text-neutral-600 mb-2">Outlined Badges:</p>
             <div class="flex flex-wrap gap-3">
               <ds-badge variant="primary" [outlined]="true">Primary</ds-badge>
-              <ds-badge variant="secondary" [outlined]="true">Secondary</ds-badge>
+              <ds-badge variant="secondary" [outlined]="true"
+                >Secondary</ds-badge
+              >
               <ds-badge variant="success" [outlined]="true">Success</ds-badge>
               <ds-badge variant="danger" [outlined]="true">Danger</ds-badge>
               <ds-badge variant="warning" [outlined]="true">Warning</ds-badge>
@@ -91,54 +92,54 @@ interface User {
       </app-example-box>
 
       <!-- Tables -->
-      <app-example-box title="Data Tables" description="For displaying tabular data">
+      <app-example-box
+        title="Data Tables"
+        description="For displaying tabular data"
+      >
         <div class="space-y-6">
-          {{users| json}}
           <ds-table
             [data]="users"
             [filterable]="true"
             [sortable]="true"
             [paginated]="true"
-            [selectable]="true">
-            <ds-table-column
-              field="id"
-              header="ID"
-              [sortable]="true">
+            [selectable]="true"
+          >
+            <ds-table-column field="id" header="ID" [sortable]="true">
             </ds-table-column>
             <ds-table-column
               field="name"
               header="Name"
               [sortable]="true"
-              [filterable]="true">
+              [filterable]="true"
+            >
             </ds-table-column>
             <ds-table-column
               field="email"
               header="Email"
               [sortable]="true"
-              [filterable]="true">
+              [filterable]="true"
+            >
             </ds-table-column>
-            <ds-table-column
-              field="role"
-              header="Role"
-              [sortable]="true">
+            <ds-table-column field="role" header="Role" [sortable]="true">
             </ds-table-column>
-            <ds-table-column
-              field="status"
-              header="Status"
-              [sortable]="true">
+            <ds-table-column field="status" header="Status" [sortable]="true">
             </ds-table-column>
             <ds-table-column
               field="lastLogin"
               header="Last Login"
               [sortable]="true"
-              [format]="formatDate">
+              [format]="formatDate"
+            >
             </ds-table-column>
           </ds-table>
         </div>
       </app-example-box>
 
       <!-- Tabs -->
-      <app-example-box title="Tabs" description="Organize content into separate views">
+      <app-example-box
+        title="Tabs"
+        description="Organize content into separate views"
+      >
         <div class="space-y-6">
           <div>
             <p class="text-sm text-neutral-600 mb-2">Default Tabs:</p>
@@ -158,7 +159,9 @@ interface User {
               <ds-tab title="Notifications">
                 <div class="py-3">
                   <h3 class="font-medium">Notifications Content</h3>
-                  <p class="mt-1">This is the content for the notifications tab.</p>
+                  <p class="mt-1">
+                    This is the content for the notifications tab.
+                  </p>
                 </div>
               </ds-tab>
             </ds-tabs>
@@ -249,7 +252,7 @@ export class DataDisplayShowcaseComponent {
       email: 'john.doe@example.com',
       role: 'Admin',
       status: 'active',
-      lastLogin: new Date('2023-01-10T08:30:00')
+      lastLogin: new Date('2023-01-10T08:30:00'),
     },
     {
       id: 2,
@@ -257,7 +260,7 @@ export class DataDisplayShowcaseComponent {
       email: 'jane.smith@example.com',
       role: 'Editor',
       status: 'active',
-      lastLogin: new Date('2023-01-15T14:20:00')
+      lastLogin: new Date('2023-01-15T14:20:00'),
     },
     {
       id: 3,
@@ -265,7 +268,7 @@ export class DataDisplayShowcaseComponent {
       email: 'robert.j@example.com',
       role: 'Viewer',
       status: 'inactive',
-      lastLogin: new Date('2022-12-25T10:15:00')
+      lastLogin: new Date('2022-12-25T10:15:00'),
     },
     {
       id: 4,
@@ -273,7 +276,7 @@ export class DataDisplayShowcaseComponent {
       email: 'emily.d@example.com',
       role: 'Editor',
       status: 'active',
-      lastLogin: new Date('2023-01-18T09:45:00')
+      lastLogin: new Date('2023-01-18T09:45:00'),
     },
     {
       id: 5,
@@ -281,7 +284,7 @@ export class DataDisplayShowcaseComponent {
       email: 'michael.b@example.com',
       role: 'Viewer',
       status: 'pending',
-      lastLogin: new Date('2023-01-05T16:30:00')
+      lastLogin: new Date('2023-01-05T16:30:00'),
     },
     {
       id: 6,
@@ -289,7 +292,7 @@ export class DataDisplayShowcaseComponent {
       email: 'sarah.w@example.com',
       role: 'Editor',
       status: 'active',
-      lastLogin: new Date('2023-01-17T11:20:00')
+      lastLogin: new Date('2023-01-17T11:20:00'),
     },
     {
       id: 7,
@@ -297,7 +300,7 @@ export class DataDisplayShowcaseComponent {
       email: 'david.l@example.com',
       role: 'Admin',
       status: 'active',
-      lastLogin: new Date('2023-01-19T08:10:00')
+      lastLogin: new Date('2023-01-19T08:10:00'),
     },
     {
       id: 8,
@@ -305,7 +308,7 @@ export class DataDisplayShowcaseComponent {
       email: 'lisa.t@example.com',
       role: 'Viewer',
       status: 'inactive',
-      lastLogin: new Date('2022-12-30T14:50:00')
+      lastLogin: new Date('2022-12-30T14:50:00'),
     },
     {
       id: 9,
@@ -313,7 +316,7 @@ export class DataDisplayShowcaseComponent {
       email: 'james.a@example.com',
       role: 'Editor',
       status: 'pending',
-      lastLogin: new Date('2023-01-08T10:30:00')
+      lastLogin: new Date('2023-01-08T10:30:00'),
     },
     {
       id: 10,
@@ -321,8 +324,8 @@ export class DataDisplayShowcaseComponent {
       email: 'jennifer.m@example.com',
       role: 'Viewer',
       status: 'active',
-      lastLogin: new Date('2023-01-16T13:15:00')
-    }
+      lastLogin: new Date('2023-01-16T13:15:00'),
+    },
   ];
 
   formatDate(value: Date): string {
@@ -332,7 +335,7 @@ export class DataDisplayShowcaseComponent {
       month: 'short',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     });
   }
 }
