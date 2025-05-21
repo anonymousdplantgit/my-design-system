@@ -26,3 +26,5 @@ export * from './lib/components/progress-bar.component';
 export * from './lib/components/spinner.component';
 // Directives
 export * from './lib/directives/tooltip.directive';
+// Services
+export { ModalService } from './lib/service/modal.service';

@@ -1,15 +1,16 @@
-import {Component, Input, forwardRef, OnInit, Optional, Self, Injector} from '@angular/core';
+import { Component, Input, forwardRef, OnInit, Optional, Self, Injector } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
-import {NgClass, NgIf} from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'ds-checkbox',
+  standalone: true,
   template: `
     <div class="flex items-center" [class.opacity-50]="disabled">
       <input
         type="checkbox"
         [id]="id"
-        [checked]="value"
+        [checked]="checked"
         [required]="required"
         [disabled]="disabled"
         [ngClass]="[
@@ -47,8 +48,8 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
   @Input() disabled: boolean = false;
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() id: string = '';
+  @Input() checked: boolean = false;
 
-  value: boolean = false;
   controlDir?: NgControl;
 
   private onChange: any = () => {};
@@ -78,7 +79,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
 
   // ControlValueAccessor interface methods
   writeValue(value: boolean): void {
-    this.value = value;
+    this.checked = value;
   }
 
   registerOnChange(fn: any): void {
@@ -95,7 +96,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
 
   onCheckboxChange(event: Event): void {
     const checked = (event.target as HTMLInputElement).checked;
-    this.value = checked;
+    this.checked = checked;
     this.onChange(checked);
     this.onTouched();
   }

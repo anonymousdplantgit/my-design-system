@@ -1,15 +1,26 @@
 // Main Showcase Component - Container for all examples
 import { Component } from '@angular/core';
 import { TabComponent, TabsComponent } from 'design-lib';
-import {LayoutShowcaseComponent} from './components/layout-showcase.component';
-import {ButtonsShowcaseComponent} from './components/buttons-showcase.component';
-import {FormsShowcaseComponent} from './components/forms-showcase.component';
-import {FeedbackShowcaseComponent} from './components/feedback-showcase.component';
+import { LayoutShowcaseComponent } from './components/layout-showcase.component';
+import { ButtonsShowcaseComponent } from './components/buttons-showcase.component';
+import { FormsShowcaseComponent } from './components/forms-showcase.component';
+import { FeedbackShowcaseComponent } from './components/feedback-showcase.component';
+import { DataDisplayShowcaseComponent } from './components/data-display-showcase.component';
+import { ExamplesShowcaseComponent } from './components/examples-showcase.component';
 
 @Component({
   selector: 'app-showcase',
   standalone: true,
-  imports: [TabsComponent, TabComponent, ButtonsShowcaseComponent, FormsShowcaseComponent, FeedbackShowcaseComponent, LayoutShowcaseComponent, ButtonsShowcaseComponent, FormsShowcaseComponent, FeedbackShowcaseComponent],
+  imports: [
+    TabsComponent,
+    TabComponent,
+    ButtonsShowcaseComponent,
+    FormsShowcaseComponent,
+    FeedbackShowcaseComponent,
+    LayoutShowcaseComponent,
+    DataDisplayShowcaseComponent,
+    ExamplesShowcaseComponent
+  ],
   template: `
     <div class="bg-neutral-50 min-h-screen pb-12">
       <header class="bg-white border-b border-neutral-200 py-4 px-6 mb-8">

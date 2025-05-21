@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NgClass } from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 
 @Component({
   selector: 'ds-button',
@@ -34,7 +34,7 @@ import { NgClass } from '@angular/common';
       </span>
     </button>
   `,
-  imports: [NgClass]
+  imports: [NgClass, NgIf]
 })
 export class ButtonComponent {
   @Input() variant: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'link' = 'primary';

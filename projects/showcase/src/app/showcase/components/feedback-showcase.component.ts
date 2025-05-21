@@ -8,8 +8,8 @@ import {
   SpinnerComponent,
   TooltipDirective
 } from 'design-lib';
-import {ShowcaseSectionComponent} from '../shared/showcase-section.component';
-import {ExampleBoxComponent} from '../shared/example-box.component';
+import { ShowcaseSectionComponent } from '../shared/showcase-section.component';
+import { ExampleBoxComponent } from '../shared/example-box.component';
 
 @Component({
   selector: 'app-feedback-showcase',
@@ -225,7 +225,7 @@ export class FeedbackShowcaseComponent {
       content: 'This modal was created using the ModalService for imperative usage.',
       size: 'md',
       showFooter: true,
-      footerAlign: 'right'
+      //footerAlign: 'right'
     });
   }
 

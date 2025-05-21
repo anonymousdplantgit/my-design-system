@@ -1,5 +1,5 @@
 import { Component, Input, ContentChild, TemplateRef } from '@angular/core';
-import { NgClass, NgIf } from '@angular/common';
+import {NgClass, NgIf, NgTemplateOutlet} from '@angular/common';
 
 @Component({
   selector: 'ds-card',
@@ -44,7 +44,7 @@ import { NgClass, NgIf } from '@angular/common';
     </div>
   `,
   standalone: true,
-  imports: [NgClass, NgIf]
+  imports: [NgClass, NgIf, NgTemplateOutlet]
 })
 export class CardComponent {
   @Input() title?: string;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {
   CheckboxComponent,
   DatepickerComponent,
@@ -202,7 +202,7 @@ import {NgClass} from '@angular/common';
 
             <ds-checkbox
               label="Checked checkbox"
-              [value]="true"
+              [checked]="true"
             ></ds-checkbox>
           </div>
         </app-example-box>
@@ -319,16 +319,18 @@ export class FormsShowcaseComponent {
     { value: 'prefer-not', label: 'Prefer not to say' }
   ];
 
-  // Sample form
-  sampleForm = this.fb.group({
-    firstName: ['', [Validators.required, Validators.minLength(2)]],
-    lastName: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    country: ['', [Validators.required]],
-    terms: [false, [Validators.requiredTrue]]
-  });
 
-  constructor(private fb: FormBuilder) {}
+  sampleForm: FormGroup
+  constructor(private fb: FormBuilder) {
+    // Sample form
+    this.sampleForm = this.fb.group({
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      country: ['', [Validators.required]],
+      terms: [false, [Validators.requiredTrue]]
+    });
+  }
 
   onSubmit() {
     if (this.sampleForm.valid) {

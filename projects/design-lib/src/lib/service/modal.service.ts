@@ -1,5 +1,5 @@
-import { Injectable, ComponentRef, Injector, ApplicationRef, EmbeddedViewRef, Type } from '@angular/core';
-import {ModalComponent} from 'design-lib';
+import { Injectable, ComponentRef, Injector, ApplicationRef, EmbeddedViewRef, Type, ComponentFactoryResolver } from '@angular/core';
+import { ModalComponent } from '../components/modal.component';
 
 export interface ModalOptions {
   title?: string;
@@ -125,10 +125,9 @@ export class ModalService {
    * Helper method to create component
    */
   private createComponent<T>(component: Type<T>): ComponentRef<T> {
-    // @ts-ignore
-    return this.injector.get(ApplicationRef)
-      .componentTypes.findIndex(c => c === component) === -1
-      ? component['ɵfac'](this.injector)
-      : this.injector.get(component as any);
+    // Use Angular's ComponentFactoryResolver to create components dynamically
+    const componentFactoryResolver = this.injector.get(ComponentFactoryResolver);
+    const factory = componentFactoryResolver.resolveComponentFactory(component);
+    return factory.create(this.injector);
   }
 }
