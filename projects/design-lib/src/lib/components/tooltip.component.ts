@@ -1,36 +1,44 @@
 import {
-  Component,
-  Input,
-  ElementRef,
-  ViewChild,
-  HostListener,
   AfterViewInit,
-  Renderer2,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
   OnDestroy,
-  ChangeDetectorRef
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'ds-tooltip',
+  standalone: true,
   template: `
     <div class="inline-block relative">
       <!-- Content that triggers tooltip -->
-      <div (mouseenter)="show()" (mouseleave)="hide()" (click)="toggleOnClick && toggle()">
+      <div
+        (mouseenter)="show()"
+        (mouseleave)="hide()"
+        (click)="toggleOnClick && toggle()"
+      >
         <ng-content></ng-content>
       </div>
 
       <!-- Tooltip element -->
-      <div #tooltip
-           *ngIf="isVisible"
-           [ngClass]="tooltipClasses"
-           role="tooltip"
-           [style.transition]="'opacity 150ms, transform 150ms'"
-           [style.pointer-events]="'none'">
+      <div
+        #tooltip
+        *ngIf="isVisible"
+        [ngClass]="tooltipClasses"
+        role="tooltip"
+        [style.transition]="'opacity 150ms, transform 150ms'"
+        [style.pointer-events]="'none'"
+      >
         <!-- Arrow element -->
-        <div #arrow
-             class="absolute w-3 h-3 transform rotate-45"
-             [ngClass]="arrowClasses"></div>
+        <div
+          #arrow
+          class="absolute w-3 h-3 transform rotate-45"
+          [ngClass]="arrowClasses"
+        ></div>
 
         <div class="relative z-10 px-3 py-2 text-sm">
           {{ content }}
@@ -41,7 +49,7 @@ import { NgClass, NgIf } from '@angular/common';
       </div>
     </div>
   `,
-  imports: [NgClass, NgIf]
+  imports: [NgClass, NgIf],
 })
 export class TooltipComponent implements AfterViewInit, OnDestroy {
   @ViewChild('tooltip') tooltipElement?: ElementRef;
@@ -62,14 +70,20 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
   private hideTimeout?: number;
   private resizeObserver?: ResizeObserver;
 
+  constructor(
+    private renderer: Renderer2,
+    private cd: ChangeDetectorRef,
+  ) {}
+
   get toggleOnClick(): boolean {
     return this.trigger === 'click' || this.trigger === 'both';
   }
 
   get tooltipClasses(): string {
-    const variantClass = this.variant === 'dark'
-      ? 'bg-neutral-800 text-white'
-      : 'bg-white text-neutral-800 border border-neutral-200 shadow-sm';
+    const variantClass =
+      this.variant === 'dark'
+        ? 'bg-neutral-800 text-white'
+        : 'bg-white text-neutral-800 border border-neutral-200 shadow-sm';
 
     return `
       absolute z-50 rounded max-w-xs
@@ -81,21 +95,21 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
   }
 
   get arrowClasses(): string {
-    const variantClass = this.variant === 'dark'
-      ? 'bg-neutral-800'
-      : 'bg-white border border-neutral-200';
+    const variantClass =
+      this.variant === 'dark'
+        ? 'bg-neutral-800'
+        : 'bg-white border border-neutral-200';
 
     return `${variantClass}`;
   }
 
-  constructor(
-    private renderer: Renderer2,
-    private cd: ChangeDetectorRef
-  ) {}
-
   ngAfterViewInit(): void {
     if (this.tooltipElement) {
-      this.renderer.setStyle(this.tooltipElement.nativeElement, 'max-width', this.maxWidth);
+      this.renderer.setStyle(
+        this.tooltipElement.nativeElement,
+        'max-width',
+        this.maxWidth,
+      );
     }
 
     // Set up resize observer to update position when content changes
@@ -179,20 +193,20 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
     const positions = {
       top: {
         top: -(tooltipRect.height + this.offset),
-        left: (parentRect.width - tooltipRect.width) / 2
+        left: (parentRect.width - tooltipRect.width) / 2,
       },
       bottom: {
         top: parentRect.height + this.offset,
-        left: (parentRect.width - tooltipRect.width) / 2
+        left: (parentRect.width - tooltipRect.width) / 2,
       },
       left: {
         top: (parentRect.height - tooltipRect.height) / 2,
-        left: -(tooltipRect.width + this.offset)
+        left: -(tooltipRect.width + this.offset),
       },
       right: {
         top: (parentRect.height - tooltipRect.height) / 2,
-        left: parentRect.width + this.offset
-      }
+        left: parentRect.width + this.offset,
+      },
     };
 
     // Get current position
@@ -211,29 +225,29 @@ export class TooltipComponent implements AfterViewInit, OnDestroy {
         top: {
           bottom: '-4px',
           left: '50%',
-          transform: 'translateX(-50%) rotate(45deg)'
+          transform: 'translateX(-50%) rotate(45deg)',
         },
         bottom: {
           top: '-4px',
           left: '50%',
-          transform: 'translateX(-50%) rotate(45deg)'
+          transform: 'translateX(-50%) rotate(45deg)',
         },
         left: {
           right: '-4px',
           top: '50%',
-          transform: 'translateY(-50%) rotate(45deg)'
+          transform: 'translateY(-50%) rotate(45deg)',
         },
         right: {
           left: '-4px',
           top: '50%',
-          transform: 'translateY(-50%) rotate(45deg)'
-        }
+          transform: 'translateY(-50%) rotate(45deg)',
+        },
       };
 
       const arrowPosition = arrowPos[this.position];
 
       // Apply arrow position
-      Object.keys(arrowPosition).forEach(key => {
+      Object.keys(arrowPosition).forEach((key) => {
         // @ts-ignore
         this.renderer.setStyle(arrow, key, arrowPosition[key]);
       });

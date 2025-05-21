@@ -3,6 +3,7 @@ import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'ds-badge',
+  standalone: true,
   template: `
     <span
       [ngClass]="[
@@ -10,16 +11,22 @@ import { NgClass } from '@angular/common';
         rounded ? 'rounded-full' : 'rounded',
         getVariantClasses(),
         getSizeClasses(),
-        className
-      ]">
+        className,
+      ]"
+    >
       <ng-content></ng-content>
     </span>
   `,
-  standalone: true,
-  imports: [NgClass]
+  imports: [NgClass],
 })
 export class BadgeComponent {
-  @Input() variant: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' = 'primary';
+  @Input() variant:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'info' = 'primary';
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() rounded: boolean = true;
   @Input() outlined: boolean = false;

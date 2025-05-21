@@ -1,15 +1,16 @@
-import { Component, Input, ContentChild, TemplateRef } from '@angular/core';
-import {NgClass, NgIf, NgTemplateOutlet} from '@angular/common';
+import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
+import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'ds-card',
+  standalone: true,
   template: `
     <div
       [ngClass]="[
         'rounded shadow overflow-hidden',
         bordered ? 'border border-neutral-200' : '',
         hoverable ? 'transition-shadow hover:shadow-lg' : '',
-        className
+        className,
       ]"
       [style.width]="width"
     >
@@ -20,15 +21,32 @@ import {NgClass, NgIf, NgTemplateOutlet} from '@angular/common';
         </ng-container>
 
         <ng-template #defaultImageTemplate>
-          <img *ngIf="imgSrc" [src]="imgSrc" [alt]="imgAlt || ''" class="w-full h-full object-cover">
+          <img
+            *ngIf="imgSrc"
+            [src]="imgSrc"
+            [alt]="imgAlt || ''"
+            class="w-full h-full object-cover"
+          />
         </ng-template>
       </div>
 
       <!-- Card header -->
-      <div *ngIf="(title || subtitle) && !noHeader"
-           [ngClass]="['px-4 py-3', headerDivider ? 'border-b border-neutral-200' : '']">
-        <h3 *ngIf="title" [ngClass]="['font-medium', titleClass]">{{ title }}</h3>
-        <p *ngIf="subtitle" [ngClass]="['text-sm text-neutral-500', subtitleClass]">{{ subtitle }}</p>
+      <div
+        *ngIf="(title || subtitle) && !noHeader"
+        [ngClass]="[
+          'px-4 py-3',
+          headerDivider ? 'border-b border-neutral-200' : '',
+        ]"
+      >
+        <h3 *ngIf="title" [ngClass]="['font-medium', titleClass]">
+          {{ title }}
+        </h3>
+        <p
+          *ngIf="subtitle"
+          [ngClass]="['text-sm text-neutral-500', subtitleClass]"
+        >
+          {{ subtitle }}
+        </p>
       </div>
 
       <!-- Card content -->
@@ -37,14 +55,19 @@ import {NgClass, NgIf, NgTemplateOutlet} from '@angular/common';
       </div>
 
       <!-- Card footer -->
-      <div *ngIf="footerTemplate"
-           [ngClass]="['px-4 py-3', footerDivider ? 'border-t border-neutral-200' : '', footerClass]">
+      <div
+        *ngIf="footerTemplate"
+        [ngClass]="[
+          'px-4 py-3',
+          footerDivider ? 'border-t border-neutral-200' : '',
+          footerClass,
+        ]"
+      >
         <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
       </div>
     </div>
   `,
-  standalone: true,
-  imports: [NgClass, NgIf, NgTemplateOutlet]
+  imports: [NgClass, NgIf, NgTemplateOutlet],
 })
 export class CardComponent {
   @Input() title?: string;

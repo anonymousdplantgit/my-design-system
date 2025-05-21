@@ -1,15 +1,24 @@
-import { Component, Input, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  Input,
+  Output,
+  QueryList,
+} from '@angular/core';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
 
 // Tab component
 @Component({
   selector: 'ds-tab',
+  standalone: true,
   template: `
     <div [class.hidden]="!active" class="p-4">
       <ng-content></ng-content>
     </div>
   `,
-  imports: []
+  imports: [],
 })
 export class TabComponent {
   @Input() title: string = '';
@@ -25,12 +34,16 @@ export class TabComponent {
   template: `
     <div class="w-full">
       <!-- Tab headers -->
-      <div [ngClass]="[
-        'flex border-b',
-        variant === 'pills' ? 'border-transparent mb-2' : 'border-neutral-200',
-        fullWidth ? 'w-full' : '',
-        'mb-4'
-      ]">
+      <div
+        [ngClass]="[
+          'flex border-b',
+          variant === 'pills'
+            ? 'border-transparent mb-2'
+            : 'border-neutral-200',
+          fullWidth ? 'w-full' : '',
+          'mb-4',
+        ]"
+      >
         <ng-container *ngFor="let tab of tabs; let i = index">
           <button
             [id]="tab.id || 'tab-' + i"
@@ -56,7 +69,7 @@ export class TabComponent {
       </div>
     </div>
   `,
-  imports: [NgClass, NgForOf, NgIf]
+  imports: [NgClass, NgForOf, NgIf],
 })
 export class TabsComponent implements AfterContentInit {
   @ContentChildren(TabComponent) tabs!: QueryList<TabComponent>;
@@ -70,7 +83,7 @@ export class TabsComponent implements AfterContentInit {
 
   ngAfterContentInit() {
     // Set the first tab as active if no active tab is set
-    const activeTabs = this.tabs.filter(tab => tab.active);
+    const activeTabs = this.tabs.filter((tab) => tab.active);
 
     if (activeTabs.length === 0 && this.tabs.first) {
       setTimeout(() => {
@@ -83,7 +96,7 @@ export class TabsComponent implements AfterContentInit {
     if (tab.disabled) return;
 
     // Deactivate all tabs
-    this.tabs.forEach(t => t.active = false);
+    this.tabs.forEach((t) => (t.active = false));
 
     // Activate the selected tab
     tab.active = true;
@@ -137,9 +150,12 @@ export class TabsComponent implements AfterContentInit {
 
   getSizeClasses(): string {
     switch (this.size) {
-      case 'sm': return 'text-sm px-2 py-1';
-      case 'lg': return 'text-lg px-5 py-3';
-      default: return 'text-base px-4 py-2'; // md
+      case 'sm':
+        return 'text-sm px-2 py-1';
+      case 'lg':
+        return 'text-lg px-5 py-3';
+      default:
+        return 'text-base px-4 py-2'; // md
     }
   }
 }

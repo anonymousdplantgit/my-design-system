@@ -14,8 +14,8 @@ import { FormsModule } from '@angular/forms';
 // Column definition component
 @Component({
   selector: 'ds-table-column',
-  template: `<ng-content></ng-content>`,
   standalone: true,
+  template: `<ng-content></ng-content>`,
 })
 export class TableColumnComponent {
   @Input() field: string = '';

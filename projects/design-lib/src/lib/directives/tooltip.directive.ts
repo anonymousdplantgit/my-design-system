@@ -1,12 +1,23 @@
-import { Directive, Input, ComponentRef, ViewContainerRef, HostListener, ComponentFactoryResolver, Renderer2, ElementRef } from '@angular/core';
-import {TooltipComponent} from '../components/tooltip.component';
+import {
+  ComponentFactoryResolver,
+  ComponentRef,
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  Renderer2,
+  ViewContainerRef,
+} from '@angular/core';
+import { TooltipComponent } from '../components/tooltip.component';
 
 @Directive({
-  selector: '[dsTooltip]'
+  selector: '[dsTooltip]',
+  standalone: true,
 })
 export class TooltipDirective {
   @Input('dsTooltip') content: string = '';
-  @Input('dsTooltipPosition') position: 'top' | 'bottom' | 'left' | 'right' = 'top';
+  @Input('dsTooltipPosition') position: 'top' | 'bottom' | 'left' | 'right' =
+    'top';
   @Input('dsTooltipVariant') variant: 'dark' | 'light' = 'dark';
   @Input('dsTooltipTrigger') trigger: 'hover' | 'click' | 'both' = 'hover';
   @Input('dsTooltipOffset') offset: number = 8;
@@ -20,7 +31,7 @@ export class TooltipDirective {
     private vcr: ViewContainerRef,
     private resolver: ComponentFactoryResolver,
     private renderer: Renderer2,
-    private el: ElementRef
+    private el: ElementRef,
   ) {}
 
   @HostListener('mouseenter')
@@ -73,7 +84,10 @@ export class TooltipDirective {
     if (this.trigger === 'click' || this.trigger === 'both') {
       setTimeout(() => {
         this.renderer.listen('document', 'click', (event: MouseEvent) => {
-          if (!this.el.nativeElement.contains(event.target) && this.tooltipRef) {
+          if (
+            !this.el.nativeElement.contains(event.target) &&
+            this.tooltipRef
+          ) {
             this.hide();
           }
         });

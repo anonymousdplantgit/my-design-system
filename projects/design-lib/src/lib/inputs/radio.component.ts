@@ -1,6 +1,10 @@
-import {Component, Input, forwardRef, OnInit, Optional, Self, Injector} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
-import {NgClass, NgForOf} from '@angular/common';
+import { Component, forwardRef, Injector, Input, OnInit } from '@angular/core';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  NgControl,
+} from '@angular/forms';
+import { NgClass, NgForOf } from '@angular/common';
 
 export interface RadioOption {
   value: any;
@@ -10,14 +14,19 @@ export interface RadioOption {
 
 @Component({
   selector: 'ds-radio',
+  standalone: true,
   template: `
-    <div [ngClass]="{
-  'flex flex-col gap-2': direction === 'vertical',
-  'flex gap-4': direction === 'horizontal'
-}">
-      <div *ngFor="let option of options"
-           class="flex items-center"
-           [class.opacity-50]="option.disabled || disabled">
+    <div
+      [ngClass]="{
+        'flex flex-col gap-2': direction === 'vertical',
+        'flex gap-4': direction === 'horizontal',
+      }"
+    >
+      <div
+        *ngFor="let option of options"
+        class="flex items-center"
+        [class.opacity-50]="option.disabled || disabled"
+      >
         <input
           type="radio"
           [name]="name"
@@ -27,34 +36,28 @@ export interface RadioOption {
           [required]="required"
           [disabled]="option.disabled || disabled"
           [ngClass]="[
-        sizeClasses.radio,
-        'appearance-none rounded-full border border-neutral-300 checked:border-primary-500 checked:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-200 transition-all duration-200'
-      ]"
+            sizeClasses.radio,
+            'appearance-none rounded-full border border-neutral-300 checked:border-primary-500 checked:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-200 transition-all duration-200',
+          ]"
           (change)="onRadioChange(option.value)"
         />
         <label
           [for]="name + '-' + option.value"
-          [ngClass]="[
-        sizeClasses.label,
-        'ml-2 cursor-pointer'
-      ]"
+          [ngClass]="[sizeClasses.label, 'ml-2 cursor-pointer']"
         >
           {{ option.label }}
         </label>
       </div>
     </div>
   `,
-  imports: [
-    NgClass,
-    NgForOf
-  ],
+  imports: [NgClass, NgForOf],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => RadioComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class RadioComponent implements ControlValueAccessor, OnInit {
   @Input() options: RadioOption[] = [];
@@ -66,14 +69,30 @@ export class RadioComponent implements ControlValueAccessor, OnInit {
 
   value: any = null;
   controlDir?: NgControl;
-
-  private onChange: any = () => {};
-  private onTouched: any = () => {};
-
   // To this:
   private ngControl: NgControl | null = null;
 
   constructor(private injector: Injector) {}
+
+  get sizeClasses(): { radio: string; label: string } {
+    switch (this.size) {
+      case 'sm':
+        return {
+          radio: 'w-4 h-4',
+          label: 'text-sm',
+        };
+      case 'lg':
+        return {
+          radio: 'w-6 h-6',
+          label: 'text-lg',
+        };
+      default:
+        return {
+          radio: 'w-5 h-5',
+          label: 'text-base',
+        };
+    }
+  }
 
   ngOnInit() {
     this.ngControl = this.injector.get(NgControl, null);
@@ -120,23 +139,7 @@ export class RadioComponent implements ControlValueAccessor, OnInit {
     return this.value === value;
   }
 
-  get sizeClasses(): { radio: string, label: string } {
-    switch (this.size) {
-      case 'sm':
-        return {
-          radio: 'w-4 h-4',
-          label: 'text-sm'
-        };
-      case 'lg':
-        return {
-          radio: 'w-6 h-6',
-          label: 'text-lg'
-        };
-      default:
-        return {
-          radio: 'w-5 h-5',
-          label: 'text-base'
-        };
-    }
-  }
+  private onChange: any = () => {};
+
+  private onTouched: any = () => {};
 }

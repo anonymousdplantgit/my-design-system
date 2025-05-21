@@ -3,16 +3,17 @@ import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'ds-avatar',
+  standalone: true,
   template: `
     <div
       [ngClass]="[
         'inline-flex items-center justify-center relative',
         rounded ? 'rounded-full' : 'rounded',
         getSizeClasses(),
-        className
+        className,
       ]"
-      [style.background-color]="bgColor">
-
+      [style.background-color]="bgColor"
+    >
       <!-- Image avatar -->
       <img
         *ngIf="src"
@@ -20,7 +21,7 @@ import { NgClass, NgIf } from '@angular/common';
         [alt]="alt || name"
         [ngClass]="[
           'object-cover w-full h-full',
-          rounded ? 'rounded-full' : 'rounded'
+          rounded ? 'rounded-full' : 'rounded',
         ]"
         (error)="onImageError()"
       />
@@ -30,8 +31,9 @@ import { NgClass, NgIf } from '@angular/common';
         *ngIf="!src || imageError"
         [ngClass]="[
           'flex items-center justify-center w-full h-full',
-          getTextColorClass()
-        ]">
+          getTextColorClass(),
+        ]"
+      >
         {{ displayText }}
       </div>
 
@@ -41,13 +43,13 @@ import { NgClass, NgIf } from '@angular/common';
         [ngClass]="[
           'absolute bottom-0 right-0 block rounded-full border-2 border-white',
           getStatusClass(),
-          getStatusSizeClass()
-        ]">
+          getStatusSizeClass(),
+        ]"
+      >
       </span>
     </div>
   `,
-  standalone: true,
-  imports: [NgClass, NgIf]
+  imports: [NgClass, NgIf],
 })
 export class AvatarComponent implements OnInit {
   @Input() name: string = '';
@@ -85,7 +87,9 @@ export class AvatarComponent implements OnInit {
       this.displayText = this.name.substring(0, 2).toUpperCase();
     } else {
       // Multi-part name, use first letter of first and last parts
-      this.displayText = (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+      this.displayText = (
+        parts[0].charAt(0) + parts[parts.length - 1].charAt(0)
+      ).toUpperCase();
     }
   }
 
@@ -109,7 +113,7 @@ export class AvatarComponent implements OnInit {
       '#A5B4FC', // indigo-300
       '#67E8F9', // cyan-300
       '#86EFAC', // green-300
-      '#FDE68A'  // yellow-300
+      '#FDE68A', // yellow-300
     ];
 
     // Use hash to pick a color
@@ -126,31 +130,46 @@ export class AvatarComponent implements OnInit {
 
   getSizeClasses(): string {
     switch (this.size) {
-      case 'xs': return 'w-6 h-6 text-xs';
-      case 'sm': return 'w-8 h-8 text-sm';
-      case 'lg': return 'w-12 h-12 text-lg';
-      case 'xl': return 'w-16 h-16 text-xl';
-      default: return 'w-10 h-10 text-base'; // md
+      case 'xs':
+        return 'w-6 h-6 text-xs';
+      case 'sm':
+        return 'w-8 h-8 text-sm';
+      case 'lg':
+        return 'w-12 h-12 text-lg';
+      case 'xl':
+        return 'w-16 h-16 text-xl';
+      default:
+        return 'w-10 h-10 text-base'; // md
     }
   }
 
   getStatusClass(): string {
     switch (this.status) {
-      case 'online': return 'bg-success-500';
-      case 'offline': return 'bg-neutral-400';
-      case 'away': return 'bg-warning-500';
-      case 'busy': return 'bg-danger-500';
-      default: return '';
+      case 'online':
+        return 'bg-success-500';
+      case 'offline':
+        return 'bg-neutral-400';
+      case 'away':
+        return 'bg-warning-500';
+      case 'busy':
+        return 'bg-danger-500';
+      default:
+        return '';
     }
   }
 
   getStatusSizeClass(): string {
     switch (this.size) {
-      case 'xs': return 'w-1.5 h-1.5';
-      case 'sm': return 'w-2 h-2';
-      case 'lg': return 'w-3 h-3';
-      case 'xl': return 'w-3.5 h-3.5';
-      default: return 'w-2.5 h-2.5'; // md
+      case 'xs':
+        return 'w-1.5 h-1.5';
+      case 'sm':
+        return 'w-2 h-2';
+      case 'lg':
+        return 'w-3 h-3';
+      case 'xl':
+        return 'w-3.5 h-3.5';
+      default:
+        return 'w-2.5 h-2.5'; // md
     }
   }
 

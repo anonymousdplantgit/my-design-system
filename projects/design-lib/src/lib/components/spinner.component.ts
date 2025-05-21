@@ -1,35 +1,48 @@
 import { Component, Input } from '@angular/core';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
+
 @Component({
   selector: 'ds-spinner',
+  standalone: true,
   template: `
     <div
       [ngClass]="[
         'inline-block animate-spin rounded-full border-solid',
         getBorderClasses(),
         getSizeClasses(),
-        className
+        className,
       ]"
       role="status"
-      aria-label="Loading">
+      aria-label="Loading"
+    >
       <span class="sr-only">Loading...</span>
     </div>
   `,
-  standalone: true,
-  imports: [NgClass]
+  imports: [NgClass],
 })
 export class SpinnerComponent {
   @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';
-  @Input() variant: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' = 'primary';
+  @Input() variant:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'info'
+    | 'light' = 'primary';
   @Input() thickness: 'thin' | 'medium' | 'thick' = 'medium';
   @Input() className: string = '';
 
   getSizeClasses(): string {
     switch (this.size) {
-      case 'sm': return 'w-4 h-4';
-      case 'lg': return 'w-8 h-8';
-      case 'xl': return 'w-12 h-12';
-      default: return 'w-6 h-6'; // md
+      case 'sm':
+        return 'w-4 h-4';
+      case 'lg':
+        return 'w-8 h-8';
+      case 'xl':
+        return 'w-12 h-12';
+      default:
+        return 'w-6 h-6'; // md
     }
   }
 
@@ -58,9 +71,12 @@ export class SpinnerComponent {
 
   getThicknessClass(): string {
     switch (this.thickness) {
-      case 'thin': return 'border-2';
-      case 'thick': return 'border-4';
-      default: return 'border-3'; // medium
+      case 'thin':
+        return 'border-2';
+      case 'thick':
+        return 'border-4';
+      default:
+        return 'border-3'; // medium
     }
   }
 }
