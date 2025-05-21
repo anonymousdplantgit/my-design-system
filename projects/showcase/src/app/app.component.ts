@@ -144,7 +144,7 @@ import {NgClass, NgForOf, NgIf} from '@angular/common';
 
           <form [formGroup]="basicForm" (ngSubmit)="onSubmit()" class="space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <ds-form-field label="First Name" [required]="true" formControlName="firstName">
+              <ds-form-field label="First Name" [required]="true" [control]="basicForm.get('firstName')!">
                 <ds-input
                   type="text"
                   placeholder="Enter first name"
@@ -153,7 +153,7 @@ import {NgClass, NgForOf, NgIf} from '@angular/common';
                 ></ds-input>
               </ds-form-field>
 
-              <ds-form-field label="Last Name" [required]="true" formControlName="lastName">
+              <ds-form-field label="Last Name" [required]="true" [control]="basicForm.get('lastName')!">
                 <ds-input
                   type="text"
                   placeholder="Enter last name"
@@ -163,7 +163,7 @@ import {NgClass, NgForOf, NgIf} from '@angular/common';
               </ds-form-field>
             </div>
 
-            <ds-form-field label="Email" [required]="true" formControlName="email">
+            <ds-form-field label="Email" [required]="true" [control]="basicForm.get('email')!">
               <ds-input
                 type="email"
                 placeholder="Enter email address"
@@ -172,7 +172,7 @@ import {NgClass, NgForOf, NgIf} from '@angular/common';
               ></ds-input>
             </ds-form-field>
 
-            <ds-form-field label="Country" [required]="true" formControlName="country">
+            <ds-form-field label="Country" [required]="true" [control]="basicForm.get('country')!">
               <ds-select
                 [options]="countries"
                 placeholder="Select a country"
@@ -181,7 +181,7 @@ import {NgClass, NgForOf, NgIf} from '@angular/common';
               ></ds-select>
             </ds-form-field>
 
-            <ds-form-field label="Gender" [required]="true" formControlName="gender">
+            <ds-form-field label="Gender" [required]="true" [control]="basicForm.get('gender')!">
               <ds-radio
                 [options]="genderOptions"
                 name="gender-form"
@@ -190,7 +190,7 @@ import {NgClass, NgForOf, NgIf} from '@angular/common';
               ></ds-radio>
             </ds-form-field>
 
-            <ds-form-field label="Birth Date" formControlName="birthdate">
+            <ds-form-field label="Birth Date" [control]="basicForm.get('birthdate')!">
               <ds-datepicker
                 placeholder="YYYY-MM-DD"
                 [size]="selectedSize"

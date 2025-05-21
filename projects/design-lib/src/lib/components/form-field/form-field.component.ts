@@ -38,7 +38,7 @@ import { FormControl, AbstractControl } from '@angular/forms';
 export class FormFieldComponent implements AfterContentInit {
   @Input() label: string = '';
   @Input() required: boolean = false;
-  @Input() control?: FormControl | AbstractControl;
+  @Input() control?: FormControl | AbstractControl | null; // Updated to accept null values
   @Input() hint?: string;
   @Input() direction: 'horizontal' | 'vertical' = 'vertical';
 

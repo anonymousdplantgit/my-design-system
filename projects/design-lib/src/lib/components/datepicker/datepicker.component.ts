@@ -1,7 +1,7 @@
 import {Component, Input, forwardRef, OnInit, Optional, Self, Injector} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 import { format, parse, isValid } from 'date-fns';
-import {NgClass} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 
 @Component({
   selector: 'ds-datepicker',
@@ -32,7 +32,8 @@ import {NgClass} from '@angular/common';
     </div>
   `,
   imports: [
-    NgClass
+    NgClass,
+    NgIf
   ],
   providers: [
     {
