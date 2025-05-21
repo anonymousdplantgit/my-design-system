@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit, OnDestroy, ViewChild, TemplateRef, ContentChild } from '@angular/core';
-import {NgClass, NgIf, NgTemplateOutlet} from '@angular/common';
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit, OnDestroy, ViewChild, TemplateRef, ContentChild, ViewEncapsulation } from '@angular/core';
+import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'ds-modal',
@@ -39,6 +39,7 @@ import {NgClass, NgIf, NgTemplateOutlet} from '@angular/common';
           'p-4',
           bodyClass
         ]">
+          <div *ngIf="bodyContent" [innerHTML]="bodyContent"></div>
           <ng-content></ng-content>
           <ng-container *ngIf="bodyTemplate"
                         [ngTemplateOutlet]="bodyTemplate"></ng-container>
@@ -89,7 +90,9 @@ import {NgClass, NgIf, NgTemplateOutlet} from '@angular/common';
       animation: modalOpen 0.2s ease-out forwards;
     }
   `],
-  imports: [NgClass, NgIf, NgTemplateOutlet]
+  imports: [NgClass, NgIf, NgTemplateOutlet],
+  standalone: true,
+  encapsulation: ViewEncapsulation.None
 })
 export class ModalComponent implements OnInit, OnDestroy {
   @ViewChild('modalContent') modalContent!: ElementRef;
@@ -110,6 +113,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() footerClass: string = '';
   @Input() footerAlign: 'left' | 'center' | 'right' = 'right';
   @Input() animation: boolean = true;
+  @Input() bodyContent: string = '';
 
   @Output() modalClose = new EventEmitter<void>();
   @Output() modalConfirm = new EventEmitter<void>();
@@ -173,88 +177,6 @@ export class ModalComponent implements OnInit, OnDestroy {
       case 'xl': return 'max-w-4xl w-full';
       case 'full': return 'max-w-full m-5 w-full';
       default: return 'max-w-lg w-full'; // md
-    }
-  }
-}
-
-// Modal Service for imperative opening
-import { Injectable, ComponentRef, Injector, ApplicationRef, EmbeddedViewRef, ComponentFactoryResolver, Type } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class ModalService {
-  private modalComponentRef: ComponentRef<ModalComponent> | null = null;
-
-  constructor(
-    private injector: Injector,
-    private appRef: ApplicationRef,
-    private componentFactoryResolver: ComponentFactoryResolver
-  ) {}
-
-  open(options: {
-    title?: string;
-    content?: string | Type<any>;
-    size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
-    showFooter?: boolean;
-    showHeader?: boolean;
-    closeOnBackdrop?: boolean;
-    data?: any;
-  }): ModalComponent {
-    // Create modal component
-    const factory = this.componentFactoryResolver.resolveComponentFactory(ModalComponent);
-    this.modalComponentRef = factory.create(this.injector);
-
-    // Set modal properties
-    const modalComponent = this.modalComponentRef.instance;
-    modalComponent.title = options.title || 'Modal';
-    modalComponent.size = options.size || 'md';
-    modalComponent.showFooter = options.showFooter !== undefined ? options.showFooter : true;
-    modalComponent.showHeader = options.showHeader !== undefined ? options.showHeader : true;
-    modalComponent.closeOnBackdrop = options.closeOnBackdrop !== undefined ? options.closeOnBackdrop : true;
-    modalComponent.isOpen = true;
-
-    // Listen for close events
-    modalComponent.modalClose.subscribe(() => {
-      this.close();
-    });
-
-    // Attach to DOM
-    this.appRef.attachView(this.modalComponentRef.hostView);
-    const domElem = (this.modalComponentRef.hostView as EmbeddedViewRef<any>).rootNodes[0];
-    document.body.appendChild(domElem);
-
-    // Handle content
-    if (options.content) {
-      if (typeof options.content === 'string') {
-        // String content
-        const contentElement = document.createElement('div');
-        contentElement.innerHTML = options.content;
-        modalComponent.modalContent.nativeElement.querySelector('.modal-body').appendChild(contentElement);
-      } else {
-        // Component content
-        const contentFactory = this.componentFactoryResolver.resolveComponentFactory(options.content);
-        const contentRef = contentFactory.create(this.injector);
-
-        // Pass data to component
-        if (options.data && contentRef.instance) {
-          Object.assign(contentRef.instance, options.data);
-        }
-
-        this.appRef.attachView(contentRef.hostView);
-        const contentElement = (contentRef.hostView as EmbeddedViewRef<any>).rootNodes[0];
-        modalComponent.modalContent.nativeElement.querySelector('.modal-body').appendChild(contentElement);
-      }
-    }
-
-    return modalComponent;
-  }
-
-  close(): void {
-    if (this.modalComponentRef) {
-      this.appRef.detachView(this.modalComponentRef.hostView);
-      this.modalComponentRef.destroy();
-      this.modalComponentRef = null;
     }
   }
 }

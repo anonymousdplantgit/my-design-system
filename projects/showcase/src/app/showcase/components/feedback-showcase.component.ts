@@ -225,7 +225,7 @@ export class FeedbackShowcaseComponent {
       content: 'This modal was created using the ModalService for imperative usage.',
       size: 'md',
       showFooter: true,
-      //footerAlign: 'right'
+      footerAlign: 'right'
     });
   }
 

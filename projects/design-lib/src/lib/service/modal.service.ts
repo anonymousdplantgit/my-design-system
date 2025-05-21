@@ -43,7 +43,6 @@ export class ModalService {
     modal.showFooter = options.showFooter !== undefined ? options.showFooter : true;
     modal.showHeader = options.showHeader !== undefined ? options.showHeader : true;
     modal.closeOnBackdrop = options.closeOnBackdrop !== undefined ? options.closeOnBackdrop : true;
-    modal.isOpen = true;
 
     if (options.headerClass) {
       modal.headerClass = options.headerClass;
@@ -61,6 +60,11 @@ export class ModalService {
       modal.footerAlign = options.footerAlign;
     }
 
+    // Add string content directly to body content if provided
+    if (typeof options.content === 'string') {
+      modal.bodyContent = options.content;
+    }
+
     // Listen for close events
     const closeSubscription = modal.modalClose.subscribe(() => {
       this.close(modalComponentRef);
@@ -72,27 +76,8 @@ export class ModalService {
     const domElem = (modalComponentRef.hostView as EmbeddedViewRef<any>).rootNodes[0];
     document.body.appendChild(domElem);
 
-    // Handle content
-    if (options.content) {
-      if (typeof options.content === 'string') {
-        // String content
-        const contentElement = document.createElement('div');
-        contentElement.innerHTML = options.content;
-        modal.modalContent.nativeElement.querySelector('.modal-body').appendChild(contentElement);
-      } else {
-        // Component content
-        const contentComponentRef = this.createComponent(options.content);
-
-        // Pass data to component
-        if (options.data && contentComponentRef.instance) {
-          Object.assign(contentComponentRef.instance, options.data);
-        }
-
-        this.appRef.attachView(contentComponentRef.hostView);
-        const contentElement = (contentComponentRef.hostView as EmbeddedViewRef<any>).rootNodes[0];
-        modal.modalContent.nativeElement.querySelector('.modal-body').appendChild(contentElement);
-      }
-    }
+    // Set to open after DOM attachment
+    modal.isOpen = true;
 
     return modal;
   }
