@@ -16,7 +16,7 @@ interface City {
 }
 
 @Component({
-  selector: 'app-select-examples',
+  selector: 'app-selects-showcase',
   standalone: true,
   imports: [SelectComponent, ReactiveFormsModule, NgIf, FormsModule, JsonPipe],
   template: `
@@ -302,7 +302,7 @@ interface City {
     </div>
   `,
 })
-export class SelectExamplesComponent {
+export class SelectsShowcaseComponent {
   // Basic options
   basicOptions = [
     { label: 'Option 1', value: 'opt1' },
