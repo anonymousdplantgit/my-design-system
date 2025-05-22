@@ -34,7 +34,7 @@ import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
       <div
         *ngIf="(title || subtitle) && !noHeader"
         [ngClass]="[
-          'px-4 py-3',
+          'px-4 py-3 text-neutral-600',
           headerDivider ? 'border-b border-neutral-200' : '',
         ]"
       >

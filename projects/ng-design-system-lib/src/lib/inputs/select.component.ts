@@ -70,7 +70,7 @@ export interface ScrollerOptions {
         #containerEl
         [ngClass]="
           [
-            'flex items-center justify-between w-full border rounded-md transition-colors cursor-pointer',
+            'flex items-center justify-between w-full border rounded-md transition-colors cursor-pointer text-neutral-600',
             getSizeClasses(),
             getVariantClasses(),
             focused
@@ -256,7 +256,7 @@ export interface ScrollerOptions {
                 <input
                   #filterInput
                   type="text"
-                  class="w-full pl-10 pr-3 py-2 border border-neutral-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500"
+                  class="w-full pl-10 pr-3 py-2 border border-neutral-300 text-neutral-600 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500"
                   [placeholder]="filterPlaceholder || 'Search...'"
                   [value]="filterValue || ''"
                   (input)="onFilterInputChange($event)"
@@ -325,7 +325,7 @@ export interface ScrollerOptions {
                     let childOption of getOptionGroupChildren(option);
                     let j = index
                   "
-                  class="px-3 py-2 cursor-pointer hover:bg-neutral-50 flex items-center justify-between"
+                  class="px-3 py-2 cursor-pointer hover:bg-neutral-50 flex items-center justify-between text-neutral-600"
                   [ngClass]="{
                     'bg-primary-50 text-primary-600': isSelected(childOption),
                     'opacity-50 cursor-not-allowed':
@@ -375,7 +375,7 @@ export interface ScrollerOptions {
               <!-- Regular option -->
               <div
                 *ngIf="!group || !isOptionGroup(option)"
-                class="px-3 py-2 cursor-pointer hover:bg-neutral-50 flex items-center justify-between"
+                class="px-3 py-2 cursor-pointer hover:bg-neutral-50 flex items-center justify-between text-neutral-600"
                 [ngClass]="{
                   'bg-primary-50 text-primary-600': isSelected(option),
                   'opacity-50 cursor-not-allowed': isOptionDisabled(option),

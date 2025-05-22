@@ -75,10 +75,10 @@ import { NgClass, NgIf } from '@angular/common';
           </div>
         </div>
 
-        <div class="ml-3 flex-1">
-          <h3 *ngIf="title" class="text-sm font-medium" [ngClass]="textColor">
+        <div class="ml-3 flex-1 flex">
+          <div *ngIf="title" class="text-sm font-medium" [ngClass]="textColor">
             {{ title }}
-          </h3>
+          </div>
           <div class="text-sm" [ngClass]="title ? 'mt-2' : ''">
             <ng-content></ng-content>
           </div>
@@ -87,9 +87,9 @@ import { NgClass, NgIf } from '@angular/common';
 
       <!-- Content without icon -->
       <ng-container *ngIf="!showIcon">
-        <h3 *ngIf="title" class="text-sm font-medium" [ngClass]="textColor">
+        <div *ngIf="title" class="text-sm font-medium" [ngClass]="textColor">
           {{ title }}
-        </h3>
+        </div>
         <div class="text-sm" [ngClass]="title ? 'mt-2' : ''">
           <ng-content></ng-content>
         </div>

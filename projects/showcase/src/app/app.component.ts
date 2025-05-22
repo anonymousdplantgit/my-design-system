@@ -9,11 +9,17 @@ import {
   MenuItem,
   ProfileMenuItem,
 } from 'ng-design-system-lib';
+import { ThemeToggleComponent } from './theme/theme-toggle.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AvatarComponent, LayoutComponent],
+  imports: [
+    RouterOutlet,
+    AvatarComponent,
+    LayoutComponent,
+    ThemeToggleComponent,
+  ],
   template: `
     <ds-layout
       [appName]="'Design System'"
@@ -40,31 +46,12 @@ import {
       </ng-template>
 
       <!-- Custom Header Right Content -->
-      <!-- <ng-template #headerRight>
+      <ng-template #headerRight>
         <div class="flex items-center space-x-3">
-          &lt;!&ndash; Search Bar &ndash;&gt;
-          <div class="hidden md:block">
-            <input
-              type="search"
-              placeholder="Search..."
-              class="px-3 py-1 border border-neutral-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-200"
-            />
-          </div>
-
-          &lt;!&ndash; Theme Toggle &ndash;&gt;
-          <button
-            type="button"
-            class="p-2 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded-md"
-            (click)="toggleTheme()"
-          >
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
-              />
-            </svg>
-          </button>
+          <!-- Theme Toggle -->
+          <ds-theme-toggle></ds-theme-toggle>
         </div>
-      </ng-template>-->
+      </ng-template>
 
       <!-- Sidebar Footer -->
       <ng-template #sidebarFooter>

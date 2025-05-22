@@ -351,10 +351,10 @@ export interface ProfileMenuItem {
                     "
                     #rla="routerLinkActive"
                     [ngClass]="[
-                      'w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 no-underline',
+                      'w-full flex items-center px-3 py-2  font-medium rounded-md transition-colors duration-150 no-underline',
                       rla.isActive
                         ? 'bg-primary-100 text-primary-700 border-r-2 border-primary-500'
-                        : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-800',
+                        : 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-800',
                       item.disabled
                         ? 'opacity-50 cursor-not-allowed pointer-events-none'
                         : 'cursor-pointer',
@@ -384,7 +384,7 @@ export interface ProfileMenuItem {
                     <!-- Badge -->
                     <span
                       *ngIf="item.badge && !sidebarCollapsed"
-                      class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800"
+                      class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary-100 text-primary-800"
                     >
                       {{ item.badge }}
                     </span>

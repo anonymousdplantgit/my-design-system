@@ -1,7 +1,13 @@
-import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators,} from '@angular/forms';
-import {SelectComponent} from 'ng-design-system-lib';
-import {JsonPipe, NgIf} from '@angular/common';
+import { Component } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { SelectComponent } from 'ng-design-system-lib';
+import { JsonPipe, NgIf } from '@angular/common';
 
 interface Country {
   name: string;
@@ -21,7 +27,7 @@ interface City {
   imports: [SelectComponent, ReactiveFormsModule, NgIf, FormsModule, JsonPipe],
   template: `
     <div class="p-6 space-y-8">
-      <h1 class="text-2xl font-bold mb-6">
+      <h1 class="text-2xl font-bold mb-6 text-neutral-800">
         Enhanced Select Component Examples
       </h1>
 
