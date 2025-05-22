@@ -2,17 +2,18 @@
 // dashboard.component.ts - Example dashboard page content
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
+
 import {
+  AvatarComponent,
   LayoutComponent,
   LayoutUser,
   MenuItem,
-} from './layout/layout.component';
-import { AvatarComponent } from 'ng-design-system-lib';
+} from 'ng-design-system-lib';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [LayoutComponent, RouterOutlet, AvatarComponent],
+  imports: [RouterOutlet, AvatarComponent, LayoutComponent],
   template: `
     <ds-layout
       [appName]="'Design System'"
