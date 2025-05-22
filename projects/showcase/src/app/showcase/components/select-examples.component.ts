@@ -278,12 +278,12 @@ interface City {
           <div class="space-y-2">
             <label class="text-sm font-medium">With Loading State</label>
             <ds-select
+              [showClear]="true"
               [options]="loadingOptions"
               [(ngModel)]="selectedLoading"
               [loading]="isLoading"
               placeholder="Loading example"
               class="w-full"
-              (onShow)="simulateLoading()"
             ></ds-select>
             <button
               class="text-sm text-blue-600 hover:underline"
@@ -381,7 +381,11 @@ export class SelectExamplesComponent {
 
   // Loading state
   isLoading = false;
-  loadingOptions: any[] = [];
+  loadingOptions = [
+    { label: 'Loaded Option 1', value: 'loaded1' },
+    { label: 'Loaded Option 2', value: 'loaded2' },
+    { label: 'Loaded Option 3', value: 'loaded3' },
+  ];
 
   // Form
   demoForm: FormGroup;
@@ -409,20 +413,6 @@ export class SelectExamplesComponent {
     };
     this.countries = [...this.countries, newCountry];
     console.log('Added new country:', newCountry);
-  }
-
-  simulateLoading(): void {
-    this.isLoading = true;
-    this.loadingOptions = [];
-
-    setTimeout(() => {
-      this.loadingOptions = [
-        { label: 'Loaded Option 1', value: 'loaded1' },
-        { label: 'Loaded Option 2', value: 'loaded2' },
-        { label: 'Loaded Option 3', value: 'loaded3' },
-      ];
-      this.isLoading = false;
-    }, 2000);
   }
 
   toggleLoading(): void {
