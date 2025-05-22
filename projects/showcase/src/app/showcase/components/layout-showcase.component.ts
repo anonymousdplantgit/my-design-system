@@ -3,10 +3,10 @@ import {
   AvatarComponent,
   BadgeComponent,
   ButtonComponent,
-  CardComponent
+  CardComponent,
 } from 'design-lib';
-import {ShowcaseSectionComponent} from '../shared/showcase-section.component';
-import {ExampleBoxComponent} from '../shared/example-box.component';
+import { ShowcaseSectionComponent } from '../shared/showcase-section.component';
+import { ExampleBoxComponent } from '../shared/example-box.component';
 
 @Component({
   selector: 'app-layout-showcase',
@@ -17,24 +17,30 @@ import {ExampleBoxComponent} from '../shared/example-box.component';
     ButtonComponent,
     CardComponent,
     ShowcaseSectionComponent,
-    ExampleBoxComponent
+    ExampleBoxComponent,
   ],
   template: `
     <app-showcase-section title="Layout Components">
       <!-- Cards -->
-      <app-example-box title="Cards" description="Containers for content and actions">
+      <app-example-box
+        title="Cards"
+        description="Containers for content and actions"
+      >
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <!-- Basic Card -->
           <ds-card title="Basic Card" subtitle="Card subtitle">
             <p>This is a basic card with a title and subtitle.</p>
-            <p class="mt-2">Cards are used to group related content and actions.</p>
+            <p class="mt-2">
+              Cards are used to group related content and actions.
+            </p>
           </ds-card>
 
           <!-- Card with Image -->
           <ds-card
             title="Card with Image"
             imgSrc="https://via.placeholder.com/400x200"
-            imgAlt="Card image">
+            imgAlt="Card image"
+          >
             <p>This card includes an image at the top.</p>
           </ds-card>
 
@@ -72,7 +78,9 @@ import {ExampleBoxComponent} from '../shared/example-box.component';
 
             <ng-template #footerTemplate>
               <div class="flex justify-between items-center">
-                <span class="text-xs text-neutral-500">Last updated: Today</span>
+                <span class="text-xs text-neutral-500"
+                  >Last updated: Today</span
+                >
                 <ds-button variant="link" size="sm">View details</ds-button>
               </div>
             </ng-template>
@@ -81,8 +89,11 @@ import {ExampleBoxComponent} from '../shared/example-box.component';
       </app-example-box>
 
       <!-- Avatars -->
-      <app-example-box title="Avatars" description="User or entity representations">
-        <div class="space-y-4">
+      <app-example-box
+        title="Avatars"
+        description="User or entity representations"
+      >
+        <div class="flex flex-col space-y-4">
           <div>
             <p class="text-sm text-neutral-600 mb-2">Avatar Sizes:</p>
             <div class="flex flex-wrap items-center gap-3">
@@ -97,17 +108,17 @@ import {ExampleBoxComponent} from '../shared/example-box.component';
           <div>
             <p class="text-sm text-neutral-600 mb-2">Image Avatars:</p>
             <div class="flex flex-wrap items-center gap-3">
-              <ds-avatar
-                src="https://i.pravatar.cc/150?img=1"
-                name="John Doe">
+              <ds-avatar src="https://i.pravatar.cc/150?img=1" name="John Doe">
               </ds-avatar>
               <ds-avatar
                 src="https://i.pravatar.cc/150?img=2"
-                name="Jane Smith">
+                name="Jane Smith"
+              >
               </ds-avatar>
               <ds-avatar
                 src="https://i.pravatar.cc/150?img=3"
-                name="Alex Johnson">
+                name="Alex Johnson"
+              >
               </ds-avatar>
             </div>
           </div>
@@ -139,7 +150,8 @@ import {ExampleBoxComponent} from '../shared/example-box.component';
               <ds-avatar
                 src="https://i.pravatar.cc/150?img=4"
                 name="Jane Smith"
-                [rounded]="false">
+                [rounded]="false"
+              >
               </ds-avatar>
             </div>
           </div>
@@ -156,8 +168,11 @@ import {ExampleBoxComponent} from '../shared/example-box.component';
       </app-example-box>
 
       <!-- Card Layouts -->
-      <app-example-box title="Card Layout Examples" description="Common card layout patterns">
-        <div class="space-y-6">
+      <app-example-box
+        title="Card Layout Examples"
+        description="Common card layout patterns"
+      >
+        <div class="flex flex-col space-y-6">
           <!-- Simple Grid -->
           <div>
             <p class="text-sm text-neutral-600 mb-2">Grid Layout:</p>
@@ -181,14 +196,23 @@ import {ExampleBoxComponent} from '../shared/example-box.component';
               <!-- Main Content -->
               <div class="col-span-6 md:col-span-4">
                 <ds-card title="Main Content">
-                  <p>This is the main content area that spans multiple columns.</p>
-                  <p class="mt-2">It typically contains the primary information or data visualization.</p>
+                  <p>
+                    This is the main content area that spans multiple columns.
+                  </p>
+                  <p class="mt-2">
+                    It typically contains the primary information or data
+                    visualization.
+                  </p>
                 </ds-card>
               </div>
 
               <!-- Sidebar -->
-              <div class="col-span-6 md:col-span-2 space-y-4">
-                <ds-card title="Statistics" [bordered]="false" className="bg-neutral-50">
+              <div class="col-span-6 md:col-span-2 flex flex-col space-y-4">
+                <ds-card
+                  title="Statistics"
+                  [bordered]="false"
+                  className="bg-neutral-50"
+                >
                   <div class="flex justify-between">
                     <div>
                       <p class="text-sm text-neutral-500">Total Users</p>
@@ -201,14 +225,16 @@ import {ExampleBoxComponent} from '../shared/example-box.component';
                 </ds-card>
 
                 <ds-card title="Recent Activity">
-                  <div class="space-y-3">
+                  <div class="flex flex-col space-y-3">
                     <div class="flex items-center">
                       <ds-avatar size="sm" name="JD"></ds-avatar>
                       <span class="ml-2 text-sm">John added a new comment</span>
                     </div>
                     <div class="flex items-center">
                       <ds-avatar size="sm" name="AS"></ds-avatar>
-                      <span class="ml-2 text-sm">Alice updated her profile</span>
+                      <span class="ml-2 text-sm"
+                        >Alice updated her profile</span
+                      >
                     </div>
                   </div>
                 </ds-card>
@@ -219,7 +245,7 @@ import {ExampleBoxComponent} from '../shared/example-box.component';
           <!-- List with Action Cards -->
           <div>
             <p class="text-sm text-neutral-600 mb-2">List with Actions:</p>
-            <div class="space-y-3">
+            <div class="flex flex-col space-y-3">
               <ds-card [bordered]="true">
                 <div class="flex justify-between items-center">
                   <div>
@@ -260,6 +286,6 @@ import {ExampleBoxComponent} from '../shared/example-box.component';
         </div>
       </app-example-box>
     </app-showcase-section>
-  `
+  `,
 })
 export class LayoutShowcaseComponent {}

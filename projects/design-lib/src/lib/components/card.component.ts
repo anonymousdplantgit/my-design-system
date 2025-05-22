@@ -7,7 +7,7 @@ import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
   template: `
     <div
       [ngClass]="[
-        'rounded shadow overflow-hidden',
+        'rounded-md shadow overflow-hidden',
         bordered ? 'border border-neutral-200' : '',
         hoverable ? 'transition-shadow hover:shadow-lg' : '',
         className,

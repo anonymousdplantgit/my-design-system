@@ -35,7 +35,7 @@ interface User {
     <app-showcase-section title="Data Display Components">
       <!-- Badges -->
       <app-example-box title="Badges" description="Small status indicators">
-        <div class="space-y-4">
+        <div class="flex flex-col space-y-4">
           <div>
             <p class="text-sm text-neutral-600 mb-2">Badge Variants:</p>
             <div class="flex flex-wrap gap-3">
@@ -96,7 +96,7 @@ interface User {
         title="Data Tables"
         description="For displaying tabular data"
       >
-        <div class="space-y-6">
+        <div class="flex flex-col space-y-6">
           <ds-table
             [data]="users"
             [filterable]="true"
@@ -140,7 +140,7 @@ interface User {
         title="Tabs"
         description="Organize content into separate views"
       >
-        <div class="space-y-6">
+        <div class="flex flex-col space-y-6">
           <div>
             <p class="text-sm text-neutral-600 mb-2">Default Tabs:</p>
             <ds-tabs>

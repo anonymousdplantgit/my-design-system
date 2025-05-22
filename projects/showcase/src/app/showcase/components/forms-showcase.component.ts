@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import {
   CheckboxComponent,
   DatepickerComponent,
@@ -7,11 +12,11 @@ import {
   InputComponent,
   RadioComponent,
   SelectComponent,
-  SelectOption
+  SelectOption,
 } from 'design-lib';
-import {ShowcaseSectionComponent} from '../shared/showcase-section.component';
-import {ExampleBoxComponent} from '../shared/example-box.component';
-import {NgClass} from '@angular/common';
+import { ShowcaseSectionComponent } from '../shared/showcase-section.component';
+import { ExampleBoxComponent } from '../shared/example-box.component';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-forms-showcase',
@@ -34,12 +39,12 @@ import {NgClass} from '@angular/common';
         <!-- Text Inputs -->
         <div>
           <app-example-box title="Text Inputs">
-            <div class="space-y-4">
-              <ds-form-field label="Standard Input" hint="This is a standard text input">
-                <ds-input
-                  type="text"
-                  placeholder="Enter text here"
-                ></ds-input>
+            <div class="flex flex-col space-y-4">
+              <ds-form-field
+                label="Standard Input"
+                hint="This is a standard text input"
+              >
+                <ds-input type="text" placeholder="Enter text here"></ds-input>
               </ds-form-field>
 
               <ds-form-field label="Required Input" [required]="true">
@@ -88,7 +93,7 @@ import {NgClass} from '@angular/common';
         <!-- Inputs with prefix/suffix -->
         <div>
           <app-example-box title="Inputs with Prefix/Suffix">
-            <div class="space-y-4">
+            <div class="flex flex-col space-y-4">
               <ds-form-field label="Price">
                 <ds-input
                   type="number"
@@ -137,7 +142,7 @@ import {NgClass} from '@angular/common';
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
         <!-- Select -->
         <app-example-box title="Select Dropdowns">
-          <div class="space-y-4">
+          <div class="flex flex-col space-y-4">
             <ds-form-field label="Standard Select">
               <ds-select
                 [options]="countries"
@@ -173,12 +178,9 @@ import {NgClass} from '@angular/common';
 
         <!-- Radio & Checkbox -->
         <app-example-box title="Radio & Checkbox">
-          <div class="space-y-4">
+          <div class="flex flex-col space-y-4">
             <ds-form-field label="Radio Buttons (Vertical)">
-              <ds-radio
-                [options]="genderOptions"
-                name="gender-demo"
-              ></ds-radio>
+              <ds-radio [options]="genderOptions" name="gender-demo"></ds-radio>
             </ds-form-field>
 
             <ds-form-field label="Radio Buttons (Horizontal)">
@@ -191,9 +193,7 @@ import {NgClass} from '@angular/common';
 
             <h4 class="font-medium mt-4 mb-2">Checkboxes</h4>
 
-            <ds-checkbox
-              label="Standard checkbox"
-            ></ds-checkbox>
+            <ds-checkbox label="Standard checkbox"></ds-checkbox>
 
             <ds-checkbox
               label="Disabled checkbox"
@@ -212,9 +212,7 @@ import {NgClass} from '@angular/common';
       <app-example-box title="Datepicker" class="mt-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <ds-form-field label="Standard Datepicker">
-            <ds-datepicker
-              placeholder="YYYY-MM-DD"
-            ></ds-datepicker>
+            <ds-datepicker placeholder="YYYY-MM-DD"></ds-datepicker>
           </ds-form-field>
 
           <ds-form-field label="Date with Min/Max">
@@ -243,9 +241,17 @@ import {NgClass} from '@angular/common';
 
       <!-- Complete Form Example -->
       <app-example-box title="Complete Form Example" class="mt-8">
-        <form [formGroup]="sampleForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <form
+          [formGroup]="sampleForm"
+          (ngSubmit)="onSubmit()"
+          class="flex flex-col space-y-4"
+        >
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <ds-form-field label="First Name" [required]="true" [control]="sampleForm.get('firstName')!">
+            <ds-form-field
+              label="First Name"
+              [required]="true"
+              [control]="sampleForm.get('firstName')!"
+            >
               <ds-input
                 type="text"
                 placeholder="Enter first name"
@@ -253,7 +259,11 @@ import {NgClass} from '@angular/common';
               ></ds-input>
             </ds-form-field>
 
-            <ds-form-field label="Last Name" [required]="true" [control]="sampleForm.get('lastName')!">
+            <ds-form-field
+              label="Last Name"
+              [required]="true"
+              [control]="sampleForm.get('lastName')!"
+            >
               <ds-input
                 type="text"
                 placeholder="Enter last name"
@@ -262,7 +272,11 @@ import {NgClass} from '@angular/common';
             </ds-form-field>
           </div>
 
-          <ds-form-field label="Email" [required]="true" [control]="sampleForm.get('email')!">
+          <ds-form-field
+            label="Email"
+            [required]="true"
+            [control]="sampleForm.get('email')!"
+          >
             <ds-input
               type="email"
               placeholder="Enter email address"
@@ -270,7 +284,11 @@ import {NgClass} from '@angular/common';
             ></ds-input>
           </ds-form-field>
 
-          <ds-form-field label="Country" [required]="true" [control]="sampleForm.get('country')!">
+          <ds-form-field
+            label="Country"
+            [required]="true"
+            [control]="sampleForm.get('country')!"
+          >
             <ds-select
               [options]="countries"
               placeholder="Select a country"
@@ -278,7 +296,7 @@ import {NgClass} from '@angular/common';
             ></ds-select>
           </ds-form-field>
 
-          <div class="space-y-2 pt-2">
+          <div class="flex flex-col space-y-2 pt-2">
             <ds-checkbox
               label="I agree to the terms and conditions"
               formControlName="terms"
@@ -290,7 +308,9 @@ import {NgClass} from '@angular/common';
               type="submit"
               class="px-4 py-2 bg-primary-500 text-white rounded hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 transition-colors"
               [disabled]="sampleForm.invalid"
-              [ngClass]="{'opacity-50 cursor-not-allowed': sampleForm.invalid}"
+              [ngClass]="{
+                'opacity-50 cursor-not-allowed': sampleForm.invalid,
+              }"
             >
               Submit Form
             </button>
@@ -298,7 +318,7 @@ import {NgClass} from '@angular/common';
         </form>
       </app-example-box>
     </app-showcase-section>
-  `
+  `,
 })
 export class FormsShowcaseComponent {
   // Options for select and radio
@@ -309,18 +329,17 @@ export class FormsShowcaseComponent {
     { value: 'uk', label: 'United Kingdom' },
     { value: 'fr', label: 'France' },
     { value: 'de', label: 'Germany' },
-    { value: 'jp', label: 'Japan' }
+    { value: 'jp', label: 'Japan' },
   ];
 
   genderOptions = [
     { value: 'male', label: 'Male' },
     { value: 'female', label: 'Female' },
     { value: 'other', label: 'Other' },
-    { value: 'prefer-not', label: 'Prefer not to say' }
+    { value: 'prefer-not', label: 'Prefer not to say' },
   ];
 
-
-  sampleForm: FormGroup
+  sampleForm: FormGroup;
   constructor(private fb: FormBuilder) {
     // Sample form
     this.sampleForm = this.fb.group({
@@ -328,7 +347,7 @@ export class FormsShowcaseComponent {
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       country: ['', [Validators.required]],
-      terms: [false, [Validators.requiredTrue]]
+      terms: [false, [Validators.requiredTrue]],
     });
   }
 
