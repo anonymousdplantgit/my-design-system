@@ -513,7 +513,7 @@ export class SelectComponent
 
   // Properties from documentation
   @Input() id?: string;
-  @Input() scrollHeight: string = '800px';
+  @Input() scrollHeight: string = '200px';
   @Input() filter: boolean = false;
   @Input() name?: string;
   @Input() style?: any;
@@ -609,6 +609,7 @@ export class SelectComponent
   protected readonly Boolean = Boolean;
   private ngControl: NgControl | null = null;
   private clickOutsideListener?: (event: Event) => void;
+  private keydownListener?: (event: KeyboardEvent) => void;
 
   constructor(
     private injector: Injector,
@@ -650,6 +651,7 @@ export class SelectComponent
 
   ngOnDestroy() {
     this.removeClickOutsideListener();
+    this.removeKeydownListener();
   }
 
   // ControlValueAccessor implementation
@@ -680,6 +682,7 @@ export class SelectComponent
     this.cdr.detectChanges();
     this.onShow.emit();
     this.addClickOutsideListener();
+    this.addKeydownListener();
 
     if (this.filter && this.autofocusFilter) {
       setTimeout(() => {
@@ -695,6 +698,7 @@ export class SelectComponent
     this.cdr.detectChanges();
     this.onHide.emit();
     this.removeClickOutsideListener();
+    this.removeKeydownListener();
 
     if (this.resetFilterOnHide) {
       this.resetFilter();
@@ -741,9 +745,10 @@ export class SelectComponent
   }
 
   onOptionSelect(event: Event, option: any): void {
-    console.log('onOptionSelect', option);
     if (this.isOptionDisabled(option)) return;
-    console.log('isOptionDisabled', option);
+
+    event.stopPropagation();
+
     const optionValue = this.getOptionValue(option);
     this.value = optionValue;
     this.selectedItem = option;
@@ -755,11 +760,18 @@ export class SelectComponent
     };
     this.onChange.emit(changeEvent);
 
-    // Close the dropdown and focus back to the container
-    this.hide();
+    // Close the dropdown immediately
+    this.overlayVisible = false;
+    this.cdr.detectChanges();
+    this.onHide.emit();
+    this.removeClickOutsideListener();
+
+    // Focus back to the container
     setTimeout(() => {
-      this.focus();
-    }, 10);
+      if (this.containerEl) {
+        this.containerEl.nativeElement.focus();
+      }
+    }, 0);
   }
 
   onFocus_(event: Event): void {
@@ -795,9 +807,12 @@ export class SelectComponent
         }
         break;
       case 'Escape':
+        event.preventDefault();
         if (this.overlayVisible) {
           this.hide();
-          event.preventDefault();
+          if (this.containerEl) {
+            this.containerEl.nativeElement.focus();
+          }
         }
         break;
     }
@@ -922,7 +937,8 @@ export class SelectComponent
 
   private updateFilteredOptions(): void {
     if (this.options && Array.isArray(this.options)) {
-      this.filteredOptions = [...this.options];
+      // Create a new array reference to avoid infinite loops
+      this.filteredOptions = this.options.slice();
     } else {
       this.filteredOptions = [];
     }
@@ -934,15 +950,18 @@ export class SelectComponent
       return;
     }
 
-    if (!value) {
-      this.filteredOptions = [...this.options];
+    if (!value || value.trim() === '') {
+      // Reset to all options when no filter value
+      this.filteredOptions = this.options.slice();
       return;
     }
 
-    const filterValue = value.toLowerCase();
+    const filterValue = value.toLowerCase().trim();
     this.filteredOptions = this.options.filter((option) => {
       if (this.group && this.isOptionGroup(option)) {
         const children = this.getOptionGroupChildren(option);
+        if (!children || !Array.isArray(children)) return false;
+
         const filteredChildren = children.filter((child) =>
           this.matchesFilter(child, filterValue),
         );
@@ -954,26 +973,28 @@ export class SelectComponent
   }
 
   private matchesFilter(option: any, filterValue: string): boolean {
-    const fieldsToSearch = this.filterFields || [this.optionLabel];
+    if (!option || !filterValue) return true;
+
+    const fieldsToSearch = this.filterFields || [this.optionLabel || 'label'];
 
     return fieldsToSearch.some((field) => {
-      const fieldValue = this.getNestedProperty(option, field)
-        ?.toString()
-        ?.toLowerCase();
-      if (!fieldValue) return false;
+      const fieldValue = this.getNestedProperty(option, field);
+      if (fieldValue === null || fieldValue === undefined) return false;
+
+      const stringValue = fieldValue.toString().toLowerCase();
 
       switch (this.filterMatchMode) {
         case 'startsWith':
-          return fieldValue.startsWith(filterValue);
+          return stringValue.startsWith(filterValue);
         case 'endsWith':
-          return fieldValue.endsWith(filterValue);
+          return stringValue.endsWith(filterValue);
         case 'equals':
-          return fieldValue === filterValue;
+          return stringValue === filterValue;
         case 'notEquals':
-          return fieldValue !== filterValue;
+          return stringValue !== filterValue;
         case 'contains':
         default:
-          return fieldValue.includes(filterValue);
+          return stringValue.includes(filterValue);
       }
     });
   }
@@ -992,6 +1013,29 @@ export class SelectComponent
         }
       };
       document.addEventListener('click', this.clickOutsideListener, true);
+    }
+  }
+
+  private addKeydownListener(): void {
+    if (!this.keydownListener) {
+      this.keydownListener = (event: KeyboardEvent) => {
+        if (event.code === 'Escape' && this.overlayVisible) {
+          event.preventDefault();
+          event.stopPropagation();
+          this.hide();
+          if (this.containerEl) {
+            this.containerEl.nativeElement.focus();
+          }
+        }
+      };
+      document.addEventListener('keydown', this.keydownListener, true);
+    }
+  }
+
+  private removeKeydownListener(): void {
+    if (this.keydownListener) {
+      document.removeEventListener('keydown', this.keydownListener, true);
+      this.keydownListener = undefined;
     }
   }
 
