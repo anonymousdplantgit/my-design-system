@@ -5,10 +5,11 @@
 // Form Components
 export * from './lib/inputs/form-field.component';
 export * from './lib/inputs/input.component';
-export * from './lib/inputs/select.component';
 export * from './lib/inputs/radio.component';
 export * from './lib/inputs/checkbox.component';
 export * from './lib/inputs/datepicker.component';
+// Types and Interfaces for Select Component
+export * from './lib/inputs/select.component';
 
 // UI Components
 export * from './lib/components/button.component';

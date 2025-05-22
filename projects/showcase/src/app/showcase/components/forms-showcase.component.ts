@@ -170,7 +170,6 @@ import { NgClass } from '@angular/common';
               <ds-select
                 [options]="countries"
                 placeholder="Select multiple"
-                [multiple]="true"
               ></ds-select>
             </ds-form-field>
           </div>

@@ -38,7 +38,7 @@ import { ExampleBoxComponent } from '../shared/example-box.component';
           <!-- Card with Image -->
           <ds-card
             title="Card with Image"
-            imgSrc="https://via.placeholder.com/400x200"
+            imgSrc="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
             imgAlt="Card image"
           >
             <p>This card includes an image at the top.</p>
