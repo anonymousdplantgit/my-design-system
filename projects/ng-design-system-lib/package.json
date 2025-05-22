@@ -1,10 +1,16 @@
 {
   "name": "@besaitech/ng-design-system-lib",
-  "description": "A comprehensive Angular design system library with Tailwind CSS",
-  "keywords": ["angular", "design-system", "ui-components", "tailwind", "typescript"],
+  "description": "A comprehensive Angular 19 design system library with Tailwind CSS",
+  "keywords": [
+    "angular",
+    "design-system",
+    "ui-components",
+    "tailwind",
+    "typescript"
+  ],
   "author": "Your Name <souhailaitsaid@gmail.com>",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "peerDependencies": {
     "@angular/common": "^19.2.0",
     "@angular/core": "^19.2.0",

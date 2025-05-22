@@ -24,9 +24,99 @@ Make sure you have the following peer dependencies installed:
 
 ```bash
 npm install @angular/common @angular/core date-fns
+
+npm install -D tailwindcss@3.4.1 postcss autoprefixer
 ```
 
 ## Quick Start
+
+1. **Add the following in your** tailwind.config.js file located on the root folder:
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{html,ts}",
+    // IMPORTANT: Include your design library
+    "./node_modules/@besaitech/ng-design-system-lib/**/*.{html,ts,js,mjs}"
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: "#eef2ff",
+          100: "#e0e7ff",
+          200: "#c7d2fe",
+          300: "#a5b4fc",
+          400: "#818cf8",
+          500: "#6366f1",
+          600: "#4f46e5",
+          700: "#4338ca",
+          800: "#3730a3",
+          900: "#312e81",
+          950: "#1e1b4b",
+        },
+        success: {
+          50: "#ecfdf5",
+          100: "#d1fae5",
+          200: "#a7f3d0",
+          300: "#6ee7b7",
+          400: "#34d399",
+          500: "#10b981",
+          600: "#059669",
+          700: "#047857",
+          800: "#065f46",
+          900: "#064e3b",
+          950: "#022c22",
+        },
+        warning: {
+          50: "#fefce8",
+          100: "#fef9c3",
+          200: "#fef08a",
+          300: "#fde047",
+          400: "#facc15",
+          500: "#eab308",
+          600: "#ca8a04",
+          700: "#a16207",
+          800: "#854d0e",
+          900: "#713f12",
+          950: "#422006",
+        },
+        danger: {
+          50: "#fef2f2",
+          100: "#fee2e2",
+          200: "#fecaca",
+          300: "#fca5a5",
+          400: "#f87171",
+          500: "#ef4444",
+          600: "#dc2626",
+          700: "#b91c1c",
+          800: "#991b1b",
+          900: "#7f1d1d",
+          950: "#450a0a",
+        },
+        neutral: {
+          50: "#f8f9fa",
+          100: "#f1f3f5",
+          200: "#e9ecef",
+          300: "#dee2e6",
+          400: "#ced4da",
+          500: "#adb5bd",
+          600: "#6c757d",
+          700: "#495057",
+          800: "#343a40",
+          900: "#212529",
+        }
+      },
+      boxShadow: {
+        focus: "0 0 0 3px rgba(0, 114, 245, 0.3)",
+      }
+    },
+  },
+  plugins: [],
+}
+
+```
 
 1. **Import the components** in your Angular module or standalone component:
 
@@ -145,7 +235,7 @@ Contributions are welcome! Please read our contributing guidelines and submit pu
 
 ## License
 
-MIT © [Your Name]
+MIT © [BESAITECH]
 
 ## Changelog
 
