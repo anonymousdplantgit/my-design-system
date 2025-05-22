@@ -4,7 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build:showcase": "ng build showcase",
+    "build:lib": "ng build ng-design-system-lib",
+    "publish:lib": "npm run build:lib && cd dist/ng-design-system-lib && npm publish --access public",
+    "publish:lib-dry": "npm run build:lib && cd dist/ng-design-system-lib && npm publish --dry-run",
+    "pack:lib": "npm run build:lib && cd dist/ng-design-system-lib && npm pack",
+    "version:patch": "cd projects/ng-design-system-lib && npm version patch",
+    "version:minor": "cd projects/ng-design-system-lib && npm version minor",
+    "version:major": "cd projects/ng-design-system-lib && npm version major",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
