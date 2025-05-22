@@ -280,8 +280,7 @@ export interface ProfileMenuItem {
               : '-translate-x-full lg:translate-x-0',
             'top-0 lg:top-0',
           ]"
-          [style.height]="'100vh'"
-          [style.paddingTop]="isDesktop ? '0' : '72px'"
+          [style.height]="isDesktop ? '93vh' : '100vh'"
         >
           <!-- Sidebar Header (Only on Mobile) -->
           <div

@@ -80,7 +80,7 @@ import {
       </ng-template>
 
       <!-- Main Content (Router Outlet) -->
-      <div class="h-full">
+      <div class="h-full p-5">
         <router-outlet></router-outlet>
       </div>
 
