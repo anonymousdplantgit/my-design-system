@@ -1,13 +1,13 @@
 // Main Showcase Component - Container for all examples
-import { Component } from '@angular/core';
-import { TabComponent, TabsComponent } from 'design-lib';
-import { LayoutShowcaseComponent } from './components/layout-showcase.component';
-import { ButtonsShowcaseComponent } from './components/buttons-showcase.component';
-import { FormsShowcaseComponent } from './components/forms-showcase.component';
-import { FeedbackShowcaseComponent } from './components/feedback-showcase.component';
-import { DataDisplayShowcaseComponent } from './components/data-display-showcase.component';
-import { ExamplesShowcaseComponent } from './components/examples-showcase.component';
-import { SelectExamplesComponent } from './components/select-examples.component';
+import {Component} from '@angular/core';
+import {TabComponent, TabsComponent} from 'ng-design-system-lib';
+import {LayoutShowcaseComponent} from './components/layout-showcase.component';
+import {ButtonsShowcaseComponent} from './components/buttons-showcase.component';
+import {FormsShowcaseComponent} from './components/forms-showcase.component';
+import {FeedbackShowcaseComponent} from './components/feedback-showcase.component';
+import {DataDisplayShowcaseComponent} from './components/data-display-showcase.component';
+import {ExamplesShowcaseComponent} from './components/examples-showcase.component';
+import {SelectExamplesComponent} from './components/select-examples.component';
 
 @Component({
   selector: 'app-showcase',

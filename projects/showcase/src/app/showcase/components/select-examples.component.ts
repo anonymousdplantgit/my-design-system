@@ -1,13 +1,7 @@
-import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { SelectComponent } from 'design-lib';
-import { JsonPipe, NgIf } from '@angular/common';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators,} from '@angular/forms';
+import {SelectComponent} from 'ng-design-system-lib';
+import {JsonPipe, NgIf} from '@angular/common';
 
 interface Country {
   name: string;

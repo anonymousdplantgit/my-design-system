@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {
   AlertComponent,
   ButtonComponent,
@@ -7,9 +7,9 @@ import {
   ProgressBarComponent,
   SpinnerComponent,
   TooltipDirective,
-} from 'design-lib';
-import { ShowcaseSectionComponent } from '../shared/showcase-section.component';
-import { ExampleBoxComponent } from '../shared/example-box.component';
+} from 'ng-design-system-lib';
+import {ShowcaseSectionComponent} from '../shared/showcase-section.component';
+import {ExampleBoxComponent} from '../shared/example-box.component';
 
 @Component({
   selector: 'app-feedback-showcase',

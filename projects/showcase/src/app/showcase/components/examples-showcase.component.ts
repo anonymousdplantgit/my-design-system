@@ -1,10 +1,5 @@
-import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
 import {
   AlertComponent,
   AvatarComponent,
@@ -21,10 +16,10 @@ import {
   TableColumnComponent,
   TableComponent,
   TabsComponent,
-} from 'design-lib';
-import { ShowcaseSectionComponent } from '../shared/showcase-section.component';
-import { ExampleBoxComponent } from '../shared/example-box.component';
-import { NgClass, NgFor } from '@angular/common';
+} from 'ng-design-system-lib';
+import {ShowcaseSectionComponent} from '../shared/showcase-section.component';
+import {ExampleBoxComponent} from '../shared/example-box.component';
+import {NgClass, NgFor} from '@angular/common';
 
 interface Order {
   id: string;

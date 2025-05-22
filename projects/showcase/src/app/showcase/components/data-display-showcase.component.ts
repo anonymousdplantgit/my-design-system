@@ -1,13 +1,7 @@
-import { Component } from '@angular/core';
-import {
-  BadgeComponent,
-  TabComponent,
-  TableColumnComponent,
-  TableComponent,
-  TabsComponent,
-} from 'design-lib';
-import { ShowcaseSectionComponent } from '../shared/showcase-section.component';
-import { ExampleBoxComponent } from '../shared/example-box.component';
+import {Component} from '@angular/core';
+import {BadgeComponent, TabComponent, TableColumnComponent, TableComponent, TabsComponent,} from 'ng-design-system-lib';
+import {ShowcaseSectionComponent} from '../shared/showcase-section.component';
+import {ExampleBoxComponent} from '../shared/example-box.component';
 
 interface User {
   id: number;

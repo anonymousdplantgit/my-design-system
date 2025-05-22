@@ -1,5 +1,5 @@
 /*
- * Public API Surface of design-lib
+ * Public API Surface of ng-design-system-lib
  */
 
 // Form Components

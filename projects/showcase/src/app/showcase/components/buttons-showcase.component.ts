@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { ButtonComponent } from 'design-lib';
-import { FormsModule } from '@angular/forms';
-import { ShowcaseSectionComponent } from '../shared/showcase-section.component';
-import { ExampleBoxComponent } from '../shared/example-box.component';
+import {Component} from '@angular/core';
+import {ButtonComponent} from 'ng-design-system-lib';
+import {FormsModule} from '@angular/forms';
+import {ShowcaseSectionComponent} from '../shared/showcase-section.component';
+import {ExampleBoxComponent} from '../shared/example-box.component';
 
 @Component({
   selector: 'app-buttons-showcase',

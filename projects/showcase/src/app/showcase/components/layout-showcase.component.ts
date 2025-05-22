@@ -1,12 +1,7 @@
-import { Component } from '@angular/core';
-import {
-  AvatarComponent,
-  BadgeComponent,
-  ButtonComponent,
-  CardComponent,
-} from 'design-lib';
-import { ShowcaseSectionComponent } from '../shared/showcase-section.component';
-import { ExampleBoxComponent } from '../shared/example-box.component';
+import {Component} from '@angular/core';
+import {AvatarComponent, BadgeComponent, ButtonComponent, CardComponent,} from 'ng-design-system-lib';
+import {ShowcaseSectionComponent} from '../shared/showcase-section.component';
+import {ExampleBoxComponent} from '../shared/example-box.component';
 
 @Component({
   selector: 'app-layout-showcase',

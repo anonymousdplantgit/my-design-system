@@ -4,8 +4,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "design-lib": [
-        "./dist/design-lib"
+      "ng-design-system-lib": [
+        "./dist/ng-design-system-lib"
       ]
     },
     "outDir": "./dist/out-tsc",

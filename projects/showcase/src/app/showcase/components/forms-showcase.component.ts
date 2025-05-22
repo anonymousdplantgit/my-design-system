@@ -1,10 +1,5 @@
-import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
 import {
   CheckboxComponent,
   DatepickerComponent,
@@ -13,10 +8,10 @@ import {
   RadioComponent,
   SelectComponent,
   SelectOption,
-} from 'design-lib';
-import { ShowcaseSectionComponent } from '../shared/showcase-section.component';
-import { ExampleBoxComponent } from '../shared/example-box.component';
-import { NgClass } from '@angular/common';
+} from 'ng-design-system-lib';
+import {ShowcaseSectionComponent} from '../shared/showcase-section.component';
+import {ExampleBoxComponent} from '../shared/example-box.component';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-forms-showcase',

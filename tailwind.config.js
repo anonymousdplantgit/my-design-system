@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./projects/design-lib/src/**/*.{html,ts}",
+    "./projects/ng-design-system-lib/src/**/*.{html,ts}",
     "./projects/showcase/src/**/*.{html,ts}",
   ],
   theme: {

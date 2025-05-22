@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { CardComponent } from 'design-lib';
+import {Component, Input} from '@angular/core';
+import {CardComponent} from 'ng-design-system-lib';
 
 @Component({
   selector: 'app-showcase-section',
