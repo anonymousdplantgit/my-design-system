@@ -147,10 +147,16 @@ export class AppComponent {
 
   menuItems: MenuItem[] = [
     {
-      active: true,
+      label: 'Dashboard',
+      icon: 'fas fa-folder',
+      route: '/dashboard',
+      routerLinkActiveOptions: { exact: false },
+    },
+    {
       label: 'Select',
       icon: 'fas fa-folder',
       route: '/selects',
+      routerLinkActiveOptions: { exact: false },
     },
 
     {
@@ -158,68 +164,81 @@ export class AppComponent {
       label: 'Settings',
       icon: 'fas fa-cog',
       route: '/settings',
+      routerLinkActiveOptions: { exact: false },
     },
     {
       label: 'Buttons',
       icon: 'fas fa-home',
       route: '/buttons',
+      routerLinkActiveOptions: { exact: false },
     },
     {
       label: 'Tabs',
       icon: 'fas fa-question-circle',
       route: '/tabs',
+      routerLinkActiveOptions: { exact: false },
     },
     {
       label: 'Badges',
       icon: 'fas fa-question-circle',
       route: '/badges',
+      routerLinkActiveOptions: { exact: false },
     },
     {
       label: 'Tables',
       icon: 'fas fa-folder',
       route: '/tables',
       badge: '3',
+      routerLinkActiveOptions: { exact: false },
     },
     {
       label: 'Alerts',
       icon: 'fas fa-users',
       route: '/alerts',
+      routerLinkActiveOptions: { exact: false },
     },
 
     {
       label: 'Tooltips',
       icon: 'fas fa-chart-bar',
       route: '/tooltips',
+      routerLinkActiveOptions: { exact: false },
     },
     {
       label: 'Modals',
       icon: 'fas fa-chart-bar',
       route: '/modals',
+      routerLinkActiveOptions: { exact: false },
     },
     {
       label: 'Progress & spinners',
       icon: 'fas fa-file-alt',
       route: '/progress',
+      routerLinkActiveOptions: { exact: false },
     },
     {
       label: 'Avatars',
       icon: 'fas fa-question-circle',
       route: '/avatars',
+      routerLinkActiveOptions: { exact: false },
     },
     {
       label: 'Cards',
       icon: 'fas fa-question-circle',
       route: '/cards',
+      routerLinkActiveOptions: { exact: false },
     },
     {
       label: 'Forms',
       icon: 'fas fa-question-circle',
       route: '/forms',
+      routerLinkActiveOptions: { exact: false },
     },
     {
       label: 'Examples',
       icon: 'fas fa-question-circle',
       route: '/examples',
+      routerLinkActiveOptions: { exact: false },
     },
   ];
 
@@ -227,17 +246,6 @@ export class AppComponent {
 
   onMenuItemClick(item: MenuItem): void {
     console.log('Menu item clicked:', item);
-
-    // Navigate to route if specified
-    if (item.route) {
-      this.router.navigate([item.route]);
-
-      // Update active state
-      this.menuItems.forEach((menuItem) => {
-        menuItem.active = menuItem.route === item.route;
-      });
-    }
-
     // Execute custom action if provided
     if (item.action) {
       item.action();

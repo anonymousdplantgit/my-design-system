@@ -12,8 +12,13 @@ import { TablesShowcaseComponent } from './showcase/components/tables-showcase.c
 import { AvatarsShowcaseComponent } from './showcase/components/avatars-showcase.component';
 import { CardsShowcaseComponent } from './showcase/components/cards-showcase.component';
 import { ExamplesShowcaseComponent } from './showcase/components/examples-showcase.component';
+import { DashboardComponent } from './showcase/components/dashboard.component';
 
 export const routes: Routes = [
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+  },
   {
     path: 'examples',
     component: ExamplesShowcaseComponent,

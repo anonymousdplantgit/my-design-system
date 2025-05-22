@@ -11,6 +11,7 @@ import {
 import { NgClass, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import { AvatarComponent } from './avatar.component';
 import { ButtonComponent } from './button.component';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 export interface LayoutUser {
   name: string;
@@ -25,10 +26,12 @@ export interface MenuItem {
   route?: string;
   action?: () => void;
   children?: MenuItem[];
-  active?: boolean;
   disabled?: boolean;
   badge?: string | number;
   divider?: boolean;
+  routerLinkActiveOptions?: { exact: boolean };
+  queryParams?: any;
+  fragment?: string;
 }
 
 @Component({
@@ -105,19 +108,69 @@ export interface MenuItem {
 
             <ng-template #defaultMenu>
               <div
-                *ngFor="let item of menuItems"
+                *ngFor="let item of menuItems; trackBy: trackByFn"
                 [ngClass]="{
                   'border-t border-neutral-200 pt-2 mt-2': item.divider,
                 }"
               >
+                <!-- Router Link Item -->
+                <a
+                  *ngIf="!item.divider && item.route && !item.action"
+                  [routerLink]="item.route"
+                  [queryParams]="item.queryParams"
+                  [fragment]="item.fragment"
+                  routerLinkActive="router-link-active"
+                  [routerLinkActiveOptions]="
+                    item.routerLinkActiveOptions || { exact: false }
+                  "
+                  #rla="routerLinkActive"
+                  [ngClass]="[
+                    'w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 no-underline',
+                    rla.isActive
+                      ? 'bg-primary-100 text-primary-700 border-r-2 border-primary-500'
+                      : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-800',
+                    item.disabled
+                      ? 'opacity-50 cursor-not-allowed pointer-events-none'
+                      : 'cursor-pointer',
+                    sidebarCollapsed ? 'justify-center px-2' : '',
+                  ]"
+                  [attr.title]="sidebarCollapsed ? item.label : null"
+                  (click)="onMenuItemClick(item)"
+                >
+                  <!-- Icon -->
+                  <span
+                    *ngIf="item.icon"
+                    [ngClass]="[
+                      'flex-shrink-0',
+                      sidebarCollapsed ? '' : 'mr-3',
+                    ]"
+                  >
+                    <i [class]="item.icon + ' w-5 h-5'"></i>
+                  </span>
+
+                  <!-- Label -->
+                  <span
+                    *ngIf="!sidebarCollapsed"
+                    class="flex-1 text-left truncate"
+                    >{{ item.label }}</span
+                  >
+
+                  <!-- Badge -->
+                  <span
+                    *ngIf="item.badge && !sidebarCollapsed"
+                    class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800"
+                  >
+                    {{ item.badge }}
+                  </span>
+                </a>
+
+                <!-- Action Button Item (no route) -->
                 <button
-                  *ngIf="!item.divider"
+                  *ngIf="!item.divider && (!item.route || item.action)"
                   type="button"
                   [ngClass]="[
                     'w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150',
-                    item.active
-                      ? 'bg-primary-100 text-primary-700 border-r-2 border-primary-500'
-                      : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-800',
+                    'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-800',
                     item.disabled
                       ? 'opacity-50 cursor-not-allowed'
                       : 'cursor-pointer',
@@ -139,9 +192,11 @@ export interface MenuItem {
                   </span>
 
                   <!-- Label -->
-                  <span class="flex-1 text-left truncate">{{
-                    item.label
-                  }}</span>
+                  <span
+                    *ngIf="!sidebarCollapsed"
+                    class="flex-1 text-left truncate"
+                    >{{ item.label }}</span
+                  >
 
                   <!-- Badge -->
                   <span
@@ -342,6 +397,8 @@ export interface MenuItem {
     ButtonComponent,
     AvatarComponent,
     NgForOf,
+    RouterLinkActive,
+    RouterLink,
   ],
 })
 export class LayoutComponent implements OnInit, OnDestroy {
@@ -388,7 +445,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
       window.removeEventListener('resize', this.resizeListener);
     }
   }
-
+  trackByFn(index: number, item: MenuItem): string {
+    return item.label!;
+  }
   toggleSidebar(): void {
     this.sidebarOpen = !this.sidebarOpen;
     this.sidebarToggle.emit(this.sidebarOpen);
