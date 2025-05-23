@@ -13,11 +13,26 @@ import { AvatarsShowcaseComponent } from './showcase/components/avatars-showcase
 import { CardsShowcaseComponent } from './showcase/components/cards-showcase.component';
 import { ExamplesShowcaseComponent } from './showcase/components/examples-showcase.component';
 import { DashboardComponent } from './showcase/components/dashboard.component';
+import { TextareaShowcaseComponent } from './showcase/components/textarea-showcase.component';
+import { RatingShowcaseComponent } from './showcase/components/rating-showcase.component';
+import { DonutShowcaseComponent } from './showcase/components/donut-showcase.component';
 
 export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+  },
+  {
+    path: 'donuts',
+    component: DonutShowcaseComponent,
+  },
+  {
+    path: 'textarea',
+    component: TextareaShowcaseComponent,
+  },
+  {
+    path: 'ratings',
+    component: RatingShowcaseComponent,
   },
   {
     path: 'examples',

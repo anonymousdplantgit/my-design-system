@@ -8,10 +8,13 @@ export * from './lib/inputs/input.component';
 export * from './lib/inputs/radio.component';
 export * from './lib/inputs/checkbox.component';
 export * from './lib/inputs/datepicker.component';
+export * from './lib/inputs/textarea.component';
+export * from './lib/inputs/rating.component';
 // Types and Interfaces for Select Component
 export * from './lib/inputs/select.component';
 
 // UI Components
+export * from './lib/components/donut-chart.component';
 export * from './lib/components/button.component';
 export * from './lib/components/tabs.component';
 export * from './lib/components/modal.component';

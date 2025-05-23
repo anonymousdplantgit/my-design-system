@@ -8,7 +8,6 @@ import { ButtonComponent, CardComponent } from 'ng-design-system-lib';
   imports: [CardComponent, ButtonComponent],
   template: `
     <div class="space-y-6">
-      <!-- Page Header -->
       <div class="flex justify-between items-center">
         <div>
           <h1 class="text-2xl font-bold text-neutral-800">Dashboard</h1>

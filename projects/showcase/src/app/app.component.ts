@@ -152,9 +152,27 @@ export class AppComponent {
       routerLinkActiveOptions: { exact: false },
     },
     {
+      label: 'Donuts',
+      icon: 'fas fa-tachometer-alt',
+      route: '/donuts',
+      routerLinkActiveOptions: { exact: false },
+    },
+    {
       label: 'Select Components',
       icon: 'fas fa-list',
       route: '/selects',
+      routerLinkActiveOptions: { exact: false },
+    },
+    {
+      label: 'TextArea',
+      icon: 'fas fa-list',
+      route: '/textarea',
+      routerLinkActiveOptions: { exact: false },
+    },
+    {
+      label: 'Ratings',
+      icon: 'fas fa-list',
+      route: '/ratings',
       routerLinkActiveOptions: { exact: false },
     },
     {
